@@ -42,3 +42,17 @@ C:\Users\hamid.RYMOND\18\sec\authentication\Domain\obj\Debug\net9.0\refint\Domai
 C:\Users\hamid.RYMOND\18\sec\authentication\Domain\obj\Debug\net9.0\Domain.pdb
 C:\Users\hamid.RYMOND\18\sec\authentication\Domain\obj\Debug\net9.0\Domain.genruntimeconfig.cache
 C:\Users\hamid.RYMOND\18\sec\authentication\Domain\obj\Debug\net9.0\ref\Domain.dll
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\bin\Debug\net9.0\domain.deps.json
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\bin\Debug\net9.0\domain.runtimeconfig.json
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\bin\Debug\net9.0\domain.dll
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\bin\Debug\net9.0\domain.pdb
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.csproj.AssemblyReference.cache
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.AssemblyInfoInputs.cache
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.AssemblyInfo.cs
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.csproj.CoreCompileInputs.cache
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.dll
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\refint\domain.dll
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.pdb
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\domain.genruntimeconfig.cache
+C:\Users\hamid.RYMOND\securitySystem\authentication\domain\obj\Debug\net9.0\ref\domain.dll

@@ -1,0 +1,41 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using ControlPannel.Domain.Entities;
+using ControlPannel.Domain.Enums;
+
+namespace controlpannel.domain.Entities;
+
+public class LoginPolicy : BaseEntity
+{
+    public LockTypes LockTypes { get; private set; }
+
+    [ForeignKey("User")]
+    public long UserId { get; private set; }
+    public User User { get; private set; } 
+
+    public DateTime LockStartDateTime { get; private set; }
+    public DateTime LockEndDateTime { get; private set; }
+
+    public LoginPolicy() {}
+
+    public LoginPolicy(
+        long id,
+        LockTypes lockTypes,
+        long userId,
+        DateTime lockStartDateTime,
+        DateTime lockEndDateTime
+    )
+    {
+        Id = id;
+        LockTypes = lockTypes;
+        UserId = userId;
+        LockStartDateTime = lockStartDateTime;
+        LockEndDateTime = lockEndDateTime;
+    }
+
+    public void SetLockType(LockTypes lockType)
+    {
+        LockTypes = lockType;
+    }
+
+}

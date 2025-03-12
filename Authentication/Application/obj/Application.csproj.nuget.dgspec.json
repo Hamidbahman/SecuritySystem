@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\Application.csproj": {}
+    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\Application.csproj": {
+    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\Application.csproj",
-        "projectName": "Application",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\application.csproj",
+        "projectName": "application",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\application.csproj",
         "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\application\\obj\\",
         "projectStyle": "PackageReference",
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj"
               }
             }
           }
@@ -115,14 +115,14 @@
         }
       }
     },
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\Domain.csproj": {
+    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\Domain.csproj",
-        "projectName": "Domain",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\domain.csproj",
+        "projectName": "domain",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\domain.csproj",
         "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -194,14 +194,14 @@
         }
       }
     },
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj",
-        "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj",
+        "projectName": "infrastructure",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj",
         "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -222,8 +222,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Domain\\Domain.csproj"
+              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\domain.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\domain\\domain.csproj"
               }
             }
           }

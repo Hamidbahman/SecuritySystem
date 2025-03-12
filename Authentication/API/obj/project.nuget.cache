@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zuW6QebJmVM=",
+  "dgSpecHash": "7juusNyZ5ec=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\api\\API.csproj",
+  "projectFilePath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\api\\api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

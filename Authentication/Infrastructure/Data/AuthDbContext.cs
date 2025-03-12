@@ -64,7 +64,7 @@ public class AutheDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Application>()
-                .HasMany(a => a.ConfigurationLocks) // <-- This must exist in `Application`
+                .HasMany(a => a.ConfigurationLocks) 
                 .WithOne(cl => cl.Application)
                 .HasForeignKey(cl => cl.ApplicationId)
                 .OnDelete(DeleteBehavior.Cascade);

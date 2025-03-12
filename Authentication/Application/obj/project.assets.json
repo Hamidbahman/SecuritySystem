@@ -2080,7 +2080,7 @@
           }
         }
       },
-      "Domain/1.0.0": {
+      "domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
@@ -2089,27 +2089,27 @@
           "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
         },
         "compile": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/domain.dll": {}
         }
       },
-      "Infrastructure/1.0.0": {
+      "infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Microsoft.EntityFrameworkCore.Design": "9.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.2",
-          "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
+          "Microsoft.EntityFrameworkCore.Tools": "9.0.2",
+          "domain": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/infrastructure.dll": {}
         }
       }
     }
@@ -5828,21 +5828,20 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Domain/1.0.0": {
+    "domain/1.0.0": {
       "type": "project",
-      "path": "../Domain/Domain.csproj",
-      "msbuildProject": "../Domain/Domain.csproj"
+      "path": "../domain/domain.csproj",
+      "msbuildProject": "../domain/domain.csproj"
     },
-    "Infrastructure/1.0.0": {
+    "infrastructure/1.0.0": {
       "type": "project",
-      "path": "../Infrastructure/Infrastructure.csproj",
-      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+      "path": "../infrastructure/infrastructure.csproj",
+      "msbuildProject": "../infrastructure/infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
       "BCrypt.Net-Next >= 4.0.3",
-      "Infrastructure >= 1.0.0",
       "KavenegarDotNetCore >= 1.0.7",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 9.0.2",
       "Microsoft.AspNetCore.Http >= 2.3.0",
@@ -5851,7 +5850,8 @@
       "Microsoft.Extensions.Configuration >= 9.0.2",
       "SkiaSharp >= 3.116.1",
       "StackExchange.Redis >= 2.8.31",
-      "System.ServiceModel.Http >= 8.1.1"
+      "System.ServiceModel.Http >= 8.1.1",
+      "infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5861,11 +5861,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Application\\Application.csproj",
-      "projectName": "Application",
-      "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\hamid.RYMOND\\securitySystem\\authentication\\application\\application.csproj",
+      "projectName": "application",
+      "projectPath": "C:\\Users\\hamid.RYMOND\\securitySystem\\authentication\\application\\application.csproj",
       "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Application\\obj\\",
+      "outputPath": "C:\\Users\\hamid.RYMOND\\securitySystem\\authentication\\application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5886,8 +5886,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\authentication\\infrastructure\\infrastructure.csproj"
             }
           }
         }

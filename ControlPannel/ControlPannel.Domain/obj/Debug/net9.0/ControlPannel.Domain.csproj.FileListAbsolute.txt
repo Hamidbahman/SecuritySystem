@@ -1,0 +1,4 @@
+C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfoInputs.cache
+C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfo.cs
+C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.csproj.CoreCompileInputs.cache

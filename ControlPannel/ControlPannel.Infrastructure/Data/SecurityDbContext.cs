@@ -8,7 +8,7 @@ namespace ControlPannel.Infrastructure.Data;
 
  public class SecurityDbContext : DbContext
     {
-        public SecurityDbContext(DbContextOptions<SecurityDbContext> options) : base(options) { }
+    public SecurityDbContext(DbContextOptions<SecurityDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -25,7 +25,6 @@ namespace ControlPannel.Infrastructure.Data;
         public DbSet<UserBiometric> UserBiometrics {get;set;}
         public DbSet<BiometricType> BiometricTypes {get;set;}
         public DbSet<OauthToken> OAuthTokens  {get;set;}
-        public DbSet<ValidationCode> ValidationCodes {get;set;}
         public DbSet<UserProperty> UserProperties {get;set;}
         public DbSet<LoginPolicy> LoginPolicies {get;set;}
         public DbSet<Service> Services {get;set;}
@@ -212,7 +211,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
                     ipRange: "192.168.1.0/24",
                     isAutoApprove: true,
                     scheduled: "00:00-23:59",
-                    status: 1,
+                    status: StatusTypes.Active,
                     lockEnabled: true,
                     description: "Primary Application",
                     createDate: new DateTime(2023, 1, 1),
@@ -336,6 +335,3 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         }
     }
 
-public class ValidationCode
-{
-}

@@ -1,102 +1,71 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
 using ControlPannel.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace controlpannel.infrastructure.Repositories;
-
-public class ApplicationRepository : IApplicationRepository
+namespace controlpannel.infrastructure.Repositories
 {
-    private readonly SecurityDbContext _context;
-
-    public ApplicationRepository(SecurityDbContext context)
+    public class ApplicationRepository : IApplicationRepository
     {
-        _context = context;
-    }
-
-
-    public async Task<Aplication?> GetApplicationByIdAsync(long applicationId)
-    {
-        return await _context.Applications
-            .FirstOrDefaultAsync(a => a.Id == applicationId);
-    }
-    public async Task<IEnumerable<Aplication>> GetAllAsync()
-    {
-        return await _context.Applications
-            .AsSplitQuery() 
-            .Include(a => a.Roles)
-            .Include(a => a.ApplicationPackages)
-            .ToListAsync();
-    }
-
-    public async Task<Aplication?> GetByIdAsync(long id)
-    {
-        return await _context.Applications
-            .AsSplitQuery()
-            .Include(a => a.Roles)
-            .Include(a => a.ApplicationPackages)
-            .FirstOrDefaultAsync(a => a.Id == id);
-    }
-
-    public async Task<Aplication?> GetByClientIdAsync(string clientId)
-    {
-        return await _context.Applications
-            .AsSplitQuery()
-            .Include(a => a.Roles)
-            .Include(a => a.ApplicationPackages)
-            .FirstOrDefaultAsync(a => a.ClientId == clientId);
-    }
-
-    public async Task<IEnumerable<Aplication>> GetByRoleIdAsync(long roleId)
-    {
-        return await _context.Applications
-            .AsSplitQuery()
-            .Where(a => a.Roles.Any(r => r.Id == roleId))
-            .Include(a => a.Roles)
-            .Include(a => a.ApplicationPackages)
-            .ToListAsync();
-    }
-            public async Task<List<Aplication>> GetApplicationsByIdsAsync(List<long> applicationIds)
+        private readonly SecurityDbContext _context;
+        
+        public ApplicationRepository(SecurityDbContext context)
         {
-            if (applicationIds == null || !applicationIds.Any())
-            {
-                return new List<Aplication>();
-            }
-
-            return await _context.Applications
-                .Where(a => applicationIds.Contains(a.Id))
-               .ToListAsync();
+            _context = context;
         }
 
-    public async Task AddAsync(Aplication aplication)
-    {
-        await _context.Applications.AddAsync(aplication);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdateAsync(Aplication aplication)
-    {
-        _context.Applications.Update(aplication);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task DeleteAsync(long id)
-    {
-        var application = await _context.Applications.FindAsync(id);
-        if (application != null)
+        public async Task<Aplication?> GetByIdAsync(long id)
         {
-            _context.Applications.Remove(application);
+            return await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task<List<Aplication>> GetAllAsync(string? sortField = null, bool descending = false)
+        {
+            IQueryable<Aplication> query = _context.Applications;
+            
+            if (!string.IsNullOrEmpty(sortField))
+            {
+                query = descending ? query.OrderByDescending(a => EF.Property<object>(a, sortField))
+                                    : query.OrderBy(a => EF.Property<object>(a, sortField));
+            }
+            
+            return await query.ToListAsync();
+        }
+
+        public async Task AddAsync(Aplication application)
+        {
+            await _context.Applications.AddAsync(application);
             await _context.SaveChangesAsync();
         }
-    }
 
-    public async Task<IEnumerable<Aplication>> GetApplicationsWithRolesAndPackagesAsync()
-    {
-        return await _context.Applications
-            .AsSplitQuery()
-            .Include(a => a.Roles)
-            .Include(a => a.ApplicationPackages)
-            .ToListAsync();
+        public async Task UpdateAsync(Aplication application)
+        {
+            _context.Entry(application).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteAsync(long id)
+        {
+            var application = await _context.Applications
+                .AsSplitQuery()
+                .Include(a => a.Roles)
+                .Include(a => a.ApplicationPackages)
+                .Include(a => a.ConfigurationSessions)
+                .Include(a => a.ConfigurationLocks)
+                .Include(a => a.ConfigurationPasswords)
+                .FirstOrDefaultAsync(a => a.Id == id);
+            
+            if (application == null) return false;
+            
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
     }
 }

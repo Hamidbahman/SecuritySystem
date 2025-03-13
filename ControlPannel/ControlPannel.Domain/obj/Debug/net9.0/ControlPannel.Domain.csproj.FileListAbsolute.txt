@@ -2,3 +2,15 @@ C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debu
 C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfoInputs.cache
 C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfo.cs
 C:\Users\hamid.RYMOND\securitySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\controlpannel.domain.csproj.CoreCompileInputs.cache
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\controlpannel.domain\bin\Debug\net9.0\controlpannel.domain.deps.json
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\bin\Debug\net9.0\controlpannel.domain.dll
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\bin\Debug\net9.0\controlpannel.domain.pdb
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfoInputs.cache
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.AssemblyInfo.cs
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.csproj.CoreCompileInputs.cache
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.sourcelink.json
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.dll
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\refint\controlpannel.domain.dll
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\ControlPannel.Domain\obj\Debug\net9.0\controlpannel.domain.pdb
+C:\Users\Dr\securitySystem\SecuritySystem\controlpannel\controlpannel.domain\obj\Debug\net9.0\ref\controlpannel.domain.dll

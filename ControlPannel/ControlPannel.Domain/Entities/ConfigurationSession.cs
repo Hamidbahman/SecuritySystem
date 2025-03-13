@@ -16,9 +16,19 @@ namespace ControlPannel.Domain.Entities;
         public Aplication Application { get; private set; }
 
         // Constructor
-        public ConfigurationSession(long applicationId, bool isConcurrentActive, int concurrencyCount, int sessionTimeout, long id)
+        public ConfigurationSession(
+            long id,
+            DateTime createDate,
+            DateTime modifyDate,
+            DateTime? deleteDate,
+            string? deleteUser,
+            string? modifyUser,
+            long applicationId, 
+            bool isConcurrentActive, 
+            int concurrencyCount, 
+            int sessionTimeout
+        ) : base(id, createDate, modifyDate, deleteDate, deleteUser, modifyUser)  
         {
-            Id = id;
             ApplicationId = applicationId;
             IsConcurrentActive = isConcurrentActive;
             ConcurrencyCount = concurrencyCount;

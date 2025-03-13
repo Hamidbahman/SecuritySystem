@@ -18,14 +18,19 @@ public class ConfigurationLock : BaseEntity
     public ConfigurationLock(){}
 
     public ConfigurationLock(
+        DateTime createDate,
+        DateTime modifyDate,
+        DateTime? deleteDate,
+        string? deleteUser,
+        string? modifyUser,
         long id,
         bool captchaNeeded,
         short failedLoginAmountBeforeCaptcha,
         int lockTimeInterval,
         LockTypes lockType,
         long applicationId
-    ) {
-        Id = id;
+    ): base(id, createDate, modifyDate, deleteDate, deleteUser, modifyUser)
+     {
         CaptchaNeeded = captchaNeeded;
         FailedLoginAmountBeforeCaptcha = failedLoginAmountBeforeCaptcha;
         LockTimeInterval = lockTimeInterval;

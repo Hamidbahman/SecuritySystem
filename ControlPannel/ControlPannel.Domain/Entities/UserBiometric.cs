@@ -17,12 +17,18 @@ public class UserBiometric : BaseEntity
     public UserBiometric() {}
 
     public UserBiometric(
+        DateTime createDate,
+        DateTime modifyDate,
+        DateTime? deleteDate,
+        string? deleteUser,
+        string? modifyUser,
         string biometricTitle,
         long userId,
         long id
-    ){
+    
+    ): base(id, createDate, modifyDate, deleteDate, deleteUser, modifyUser)
+    {
         BiometricTitle = biometricTitle;
         UserId = userId;
-        Id = id;
     }
 }

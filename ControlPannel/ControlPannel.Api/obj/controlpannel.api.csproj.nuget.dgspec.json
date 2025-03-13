@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj": {}
+    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
         "projectName": "ControlPannel.Api",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
-        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\controlpannel.api\\obj\\",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,17 +22,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
+              "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
+                "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
               },
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"
+              "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"
               }
             }
           }
@@ -64,6 +61,18 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.2, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[7.3.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[7.3.1, )"
             }
           },
           "imports": [
@@ -89,21 +98,17 @@
         }
       }
     },
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj",
         "projectName": "ControlPannel.Application",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj",
-        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Application\\obj\\",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj",
+        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,14 +116,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"
+              "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"
               }
             }
           }
@@ -164,21 +170,17 @@
         }
       }
     },
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
         "projectName": "ControlPannel.Domain",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
-        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
+        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -186,6 +188,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -229,21 +232,17 @@
         }
       }
     },
-    "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
         "projectName": "ControlPannel.Infrastructure",
-        "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -251,14 +250,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
-                "projectPath": "C:\\Users\\hamid.RYMOND\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj"
+              "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
+                "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj"
               }
             }
           }
@@ -292,6 +292,14 @@
               "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[9.0.3, )"
             }

@@ -4,16 +4,15 @@ using ControlPannel.Domain.Entities;
 namespace controlpannel.domain.RepositoryInterfaces;
 
 public interface IApplicationRepository
-{        Task<List<Aplication>> GetApplicationsByIdsAsync(List<long> applicationIds);
+{
+        Task<Aplication?> GetByIdAsync(long id);
+        Task<List<Aplication>> GetAllAsync(string? sortField = null, bool descending = false);
+        Task AddAsync(Aplication application);
+        Task UpdateAsync(Aplication application);
+        Task<bool> DeleteAsync(long id);
 
-    Task<Aplication?> GetApplicationByIdAsync(long applicationId);
 
-    Task<IEnumerable<Aplication>> GetAllAsync();
-    Task<Aplication?> GetByIdAsync(long id);
-    Task<Aplication?> GetByClientIdAsync(string clientId);
-    Task<IEnumerable<Aplication>> GetByRoleIdAsync(long roleId);
-    Task AddAsync(Aplication application);
-    Task UpdateAsync(Aplication application);
-    Task DeleteAsync(long id);
-    Task<IEnumerable<Aplication>> GetApplicationsWithRolesAndPackagesAsync();
+
+
+
 }

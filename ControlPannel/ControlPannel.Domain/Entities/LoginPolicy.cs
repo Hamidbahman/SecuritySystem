@@ -19,14 +19,19 @@ public class LoginPolicy : BaseEntity
     public LoginPolicy() {}
 
     public LoginPolicy(
-        long id,
+       long id,
+        DateTime createDate,
+        DateTime modifyDate,
+        DateTime? deleteDate,
+        string? deleteUser,
+        string? modifyUser,
         LockTypes lockTypes,
         long userId,
         DateTime lockStartDateTime,
         DateTime lockEndDateTime
-    )
+    ): base(id, createDate, modifyDate, deleteDate, deleteUser, modifyUser)
     {
-        Id = id;
+
         LockTypes = lockTypes;
         UserId = userId;
         LockStartDateTime = lockStartDateTime;

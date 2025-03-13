@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using ControlPannel.Domain.Enums;
 
 namespace ControlPannel.Domain.Entities;
 

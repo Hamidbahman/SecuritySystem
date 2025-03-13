@@ -31,6 +31,11 @@ namespace ControlPannel.Domain.Entities;
 
         public ConfigurationPassword(
             ICollection<UserProperty> userProperties,
+            DateTime createDate,
+            DateTime modifyDate,
+            DateTime deleteDate,
+            string? deleteUser,
+            string? modifyUser,
             long id,
             bool isComplex,
             bool mustBeChangedInFirstLogin,
@@ -45,9 +50,9 @@ namespace ControlPannel.Domain.Entities;
             bool redirectToCustomUrlAfterChangePass,
             string urlAfterChangePass,
             long applicationId,
-            bool twoFactorEnabled)
+            bool twoFactorEnabled
+            ): base(id, createDate, modifyDate, deleteDate, deleteUser, modifyUser )
         {
-            Id = id;
             IsComplex = isComplex;
             MustBeChangedInFirstLogin = mustBeChangedInFirstLogin;
             MustContainChar = mustContainChar;

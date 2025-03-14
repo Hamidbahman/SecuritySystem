@@ -1,10 +1,7 @@
-using System;
 using controlpannel.application.Dtos;
 using controlpannel.application.Dtos.ConfigurationLockDtos;
 using controlpannel.application.Services;
 using Microsoft.AspNetCore.Mvc;
-
-
 
 namespace controlpannel.api.Controllers;
 
@@ -20,9 +17,13 @@ public class ConfigurationLockController : ControllerBase
     }
 
     [HttpPost("getAllByApplication")]
-    public async Task<IActionResult> GetAllByApplicationId([FromBody] long applicationId)
+    public async Task<IActionResult> GetAllByApplicationId([FromBody] ConfigurationLockSortingRequestDto sortingRequest)
     {
-        var locks = await _configurationLockService.GetAllByApplicationIdAsync(applicationId);
+        var locks = await _configurationLockService.GetAllByApplicationIdAsync(
+            sortingRequest.ApplicationId, 
+            sortingRequest.SortByField, 
+            sortingRequest.Descending
+        );
         return Ok(locks);
     }
 

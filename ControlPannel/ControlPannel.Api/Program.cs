@@ -20,9 +20,17 @@ builder.Services.AddDbContext<SecurityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
 
-// ✅ Register Repositories & Services
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();  
-builder.Services.AddScoped<ApplicationService>();  
+// ✅ Register Repositories
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IConfigurationLockRepository, ConfigurationLockRepository>();
+builder.Services.AddScoped<IConfigurationPasswordRepository, ConfigurationPasswordRepository>();
+builder.Services.AddScoped<IConfigurationSessionRepository, ConfigurationSessionRepository>();
+
+// ✅ Register Services
+builder.Services.AddScoped<ApplicationService>();
+builder.Services.AddScoped<ConfigurationLockService>();
+builder.Services.AddScoped<ConfigurationPasswordService>();
+builder.Services.AddScoped<ConfigurationSessionService>();
 
 // ✅ Register Controllers
 builder.Services.AddControllers();

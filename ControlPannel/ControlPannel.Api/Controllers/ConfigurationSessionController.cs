@@ -1,11 +1,10 @@
-using System;
+using controlpannel.application.Dtos;
 using controlpannel.application.Dtos.ConfigurationSessionDtos;
 using controlpannel.application.Services;
 using Microsoft.AspNetCore.Mvc;
 
-
-
 namespace controlpannel.api.Controllers;
+
 [ApiController]
 [Route("api/configurationsession")]
 public class ConfigurationSessionController : ControllerBase
@@ -18,9 +17,9 @@ public class ConfigurationSessionController : ControllerBase
     }
 
     [HttpPost("getAllByApplication")]
-    public async Task<IActionResult> GetAllByApplicationId([FromBody] long applicationId)
+    public async Task<IActionResult> GetAllByApplicationId([FromBody] ConfigurationSessionSortingRequestDto sortingRequest)
     {
-        var sessions = await _configurationSessionService.GetAllByApplicationIdAsync(applicationId);
+        var sessions = await _configurationSessionService.GetAllByApplicationIdAsync(sortingRequest.ApplicationId, sortingRequest.SortByField, sortingRequest.Descending);
         return Ok(sessions);
     }
 

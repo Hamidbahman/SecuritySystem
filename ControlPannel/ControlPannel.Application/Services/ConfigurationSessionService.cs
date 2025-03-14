@@ -1,11 +1,11 @@
-using System;
+using System.Linq.Expressions;
 using AutoMapper;
 using controlpannel.application.Dtos.ConfigurationSessionDtos;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
 
-
 namespace controlpannel.application.Services;
+
 public class ConfigurationSessionService
 {
     private readonly IConfigurationSessionRepository _repository;
@@ -17,9 +17,17 @@ public class ConfigurationSessionService
         _mapper = mapper;
     }
 
-    public async Task<List<ConfigurationSessionDto>> GetAllByApplicationIdAsync(long applicationId)
+    public async Task<List<ConfigurationSessionDto>> GetAllByApplicationIdAsync(long applicationId, string sortByField, bool descending)
     {
-        var sessions = await _repository.GetAllAsync(applicationId);
+        Expression<Func<ConfigurationSession, object>> sortExpression = sortByField.ToLower() switch
+        {
+            "sessiontimeout" => cs => cs.SessionTimeout,
+            "concurrencycount" => cs => cs.ConcurrencyCount,
+            "isconcurrentactive" => cs => cs.IsConcurrentActive,
+            _ => cs => cs.Id  // Default sorting by Id
+        };
+
+        var sessions = await _repository.GetAllAsync(applicationId, sortExpression, descending);
         return _mapper.Map<List<ConfigurationSessionDto>>(sessions);
     }
 

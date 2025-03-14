@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using controlpannel.Application.Dtos;
 using controlpannel.domain.RepositoryInterfaces;
-using controlpannel.infrastructure.Repositories;
 using ControlPannel.Domain.Entities;
 
 namespace controlpannel.application.Services
@@ -36,7 +36,18 @@ namespace controlpannel.application.Services
 
         public async Task<List<ApplicationDto>> GetAllApplicationsAsync(string? sortField = null, bool descending = false)
         {
-            var applications = await _appRepo.GetAllAsync(sortField, descending);
+            // ✅ Define Expression<Func<T, object>> for sorting
+            Expression<Func<Aplication, object>> sortExpression = sortField?.ToLower() switch
+            {
+                "title" => a => a.Title,
+                "clientid" => a => a.ClientId,
+                "status" => a => a.Status,
+                "createdate" => a => a.CreateDate,
+                "modifydate" => a => a.ModifyDate,
+                _ => a => a.Id // Default sorting by Id
+            };
+
+            var applications = await _appRepo.GetAllAsync(sortExpression, descending);
             return _mapper.Map<List<ApplicationDto>>(applications);
         }
 

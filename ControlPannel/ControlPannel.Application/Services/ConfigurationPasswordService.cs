@@ -1,11 +1,12 @@
-using System;
+using System.Linq.Expressions;
 using AutoMapper;
+using controlpannel.application.Dtos;
 using controlpannel.application.Dtos.ConfigurationPassword;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
 
-
 namespace controlpannel.application.Services;
+
 public class ConfigurationPasswordService
 {
     private readonly IConfigurationPasswordRepository _repository;
@@ -17,16 +18,24 @@ public class ConfigurationPasswordService
         _mapper = mapper;
     }
 
-    public async Task<List<ConfigurationPasswordDto>> GetAllByApplicationIdAsync(long applicationId)
+    public async Task<List<ConfigurationPasswordDto>> GetAllByApplicationIdAsync(long applicationId, string sortByField, bool descending)
     {
-        var passwords = await _repository.GetAllAsync(applicationId);
+        Expression<Func<ConfigurationPassword, object>> sortExpression = sortByField.ToLower() switch
+        {
+            "ispolicyneeded" => cp => cp.IsPolicyNeeded,
+            "willpasswordexpire" => cp => cp.WillPassExpire,
+            "iscomplex" => cp => cp.IsComplex,
+            _ => cp => cp.Id // Default sorting by Id
+        };
+
+        var passwords = await _repository.GetAllAsync(applicationId, sortExpression, descending);
         return _mapper.Map<List<ConfigurationPasswordDto>>(passwords);
     }
 
     public async Task<ConfigurationPasswordDto?> GetByIdAsync(long id)
     {
-        var password = await _repository.GetByIdAsync(id);
-        return _mapper.Map<ConfigurationPasswordDto>(password);
+        var passwordConfig = await _repository.GetByIdAsync(id);
+        return _mapper.Map<ConfigurationPasswordDto>(passwordConfig);
     }
 
     public async Task AddAsync(AddConfigurationPasswordRequestDto dto)

@@ -1,59 +1,77 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using controlpannel.application.Dtos;
 using controlpannel.application.Services;
 using controlpannel.Application.Dtos;
-using controlpannel.application.Dtos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace controlpannel.api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/application")]
     public class ApplicationController : ControllerBase
     {
         private readonly ApplicationService _applicationService;
-        
+
         public ApplicationController(ApplicationService applicationService)
         {
             _applicationService = applicationService;
         }
 
+        /// ✅ Create a new application
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] AddApplicationRequestDto dto)
         {
-            var result = await _applicationService.CreateApplicationAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var application = await _applicationService.CreateApplicationAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = application.Id }, application);
         }
 
+        /// ✅ Get an application by ID
         [HttpPost("getById")]
         public async Task<IActionResult> GetById([FromBody] long id)
         {
-            var result = await _applicationService.GetApplicationByIdAsync(id);
-            if (result == null) return NotFound();
-            return Ok(result);
+            var application = await _applicationService.GetApplicationByIdAsync(id);
+            if (application == null)
+                return NotFound($"Application with ID {id} not found.");
+            return Ok(application);
         }
 
+        /// ✅ Get all applications with sorting
         [HttpPost("getAll")]
-        public async Task<IActionResult> GetAll([FromBody] SortingRequestDto sortingRequest)
+        public async Task<IActionResult> GetAll([FromBody] AplicationSortingRequestDto sortingRequest)
         {
-            var results = await _applicationService.GetAllApplicationsAsync(sortingRequest.SortField, sortingRequest.Descending);
-            return Ok(results);
+            var applications = await _applicationService.GetAllApplicationsAsync(
+                sortingRequest.SortField, 
+                sortingRequest.Descending
+            );
+            return Ok(applications);
         }
 
+        /// ✅ Update an existing application
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] UpdateApplicationRequestDto dto)
         {
-            var success = await _applicationService.UpdateApplicationAsync(dto);
-            if (!success) return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var updated = await _applicationService.UpdateApplicationAsync(dto);
+            if (!updated)
+                return NotFound($"Application with ID {dto.Id} not found.");
+
             return NoContent();
         }
 
+        /// ✅ Delete an application
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] long id)
         {
-            var success = await _applicationService.DeleteApplicationAsync(id);
-            if (!success) return NotFound();
-            return NoContent();
+            var deleted = await _applicationService.DeleteApplicationAsync(id);
+            if (!deleted)
+                return NotFound($"Application with ID {id} not found.");
+
+            return Ok(new { message = "Application deleted successfully" });
         }
     }
 }

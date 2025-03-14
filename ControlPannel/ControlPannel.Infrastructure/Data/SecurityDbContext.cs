@@ -20,8 +20,8 @@ namespace ControlPannel.Infrastructure.Data;
         public DbSet<ApplicationPackage> ApplicationPackages { get; set; }
         public DbSet<Aplication> Applications { get; set; }
         public DbSet<ConfigurationLock> ConfigurationLocks {get;set;}
-        public DbSet<ConfigurationSession> ConfigurationSession {get;set;}
-        public DbSet<ConfigurationPassword> ConfigurationPassword {get;set;}
+        public DbSet<ConfigurationSession> ConfigurationSessions {get;set;}
+        public DbSet<ConfigurationPassword> ConfigurationPasswords {get;set;}
         public DbSet<UserBiometric> UserBiometrics {get;set;}
         public DbSet<BiometricType> BiometricTypes {get;set;}
         public DbSet<OauthToken> OAuthTokens  {get;set;}
@@ -154,6 +154,35 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasOne(ap => ap.Application)
             .WithMany(a => a.ApplicationPackages)
             .HasForeignKey(ap => ap.ApplicationId)
+            .OnDelete(DeleteBehavior.Cascade);
+    });
+
+    modelBuilder.Entity<ConfigurationLock>(entity =>
+    {
+        entity.HasKey(cl => cl.Id);
+        entity.HasOne(cl => cl.Application)
+            .WithMany(a => a.ConfigurationLocks)
+            .HasForeignKey(cl => cl.ApplicationId)
+            .OnDelete(DeleteBehavior.Cascade);
+    });
+
+    // ✅ ConfigurationSession
+    modelBuilder.Entity<ConfigurationSession>(entity =>
+    {
+        entity.HasKey(cs => cs.Id);
+        entity.HasOne(cs => cs.Application)
+            .WithMany(a => a.ConfigurationSessions)
+            .HasForeignKey(cs => cs.ApplicationId)
+            .OnDelete(DeleteBehavior.Cascade);
+    });
+
+    // ✅ ConfigurationPassword
+    modelBuilder.Entity<ConfigurationPassword>(entity =>
+    {
+        entity.HasKey(cp => cp.Id);
+        entity.HasOne(cp => cp.Application)
+            .WithMany(a => a.ConfigurationPasswords)
+            .HasForeignKey(cp => cp.ApplicationId)
             .OnDelete(DeleteBehavior.Cascade);
     });
 

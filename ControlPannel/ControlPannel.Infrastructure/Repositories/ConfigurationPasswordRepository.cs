@@ -1,4 +1,4 @@
-using System;
+using System.Linq.Expressions;
 using ControlPannel.Infrastructure.Data;
 using ControlPannel.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +22,15 @@ public class ConfigurationPasswordRepository : IConfigurationPasswordRepository
             .FirstOrDefaultAsync(cp => cp.Id == id);
     }
 
-    public async Task<List<ConfigurationPassword>> GetAllAsync(long applicationId)
+    public async Task<List<ConfigurationPassword>> GetAllAsync(long applicationId, Expression<Func<ConfigurationPassword, object>> sortBy, bool descending)
     {
-        return await _context.ConfigurationPasswords
-            .Where(cp => cp.ApplicationId == applicationId)
-            .ToListAsync();
+        IQueryable<ConfigurationPassword> query = _context.ConfigurationPasswords
+            .Where(cp => cp.ApplicationId == applicationId);
+
+        // ✅ Uses Expression<Func<T, object>> for sorting dynamically
+        query = descending ? query.OrderByDescending(sortBy) : query.OrderBy(sortBy);
+
+        return await query.ToListAsync();
     }
 
     public async Task AddAsync(ConfigurationPassword configurationPassword)

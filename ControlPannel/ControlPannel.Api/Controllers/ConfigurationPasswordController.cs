@@ -1,9 +1,7 @@
-using System;
+using controlpannel.application.Dtos;
 using controlpannel.application.Dtos.ConfigurationPassword;
 using controlpannel.application.Services;
 using Microsoft.AspNetCore.Mvc;
-
-
 
 namespace controlpannel.api.Controllers;
 
@@ -19,19 +17,23 @@ public class ConfigurationPasswordController : ControllerBase
     }
 
     [HttpPost("getAllByApplication")]
-    public async Task<IActionResult> GetAllByApplicationId([FromBody] long applicationId)
+    public async Task<IActionResult> GetAllByApplicationId([FromBody] ConfigurationPasswordSortingRequestDto sortingRequest)
     {
-        var passwords = await _configurationPasswordService.GetAllByApplicationIdAsync(applicationId);
+        var passwords = await _configurationPasswordService.GetAllByApplicationIdAsync(
+            sortingRequest.ApplicationId, 
+            sortingRequest.SortByField, 
+            sortingRequest.Descending
+        );
         return Ok(passwords);
     }
 
     [HttpPost("getById")]
     public async Task<IActionResult> GetById([FromBody] long id)
     {
-        var password = await _configurationPasswordService.GetByIdAsync(id);
-        if (password == null)
+        var passwordConfig = await _configurationPasswordService.GetByIdAsync(id);
+        if (passwordConfig == null)
             return NotFound($"ConfigurationPassword with ID {id} not found.");
-        return Ok(password);
+        return Ok(passwordConfig);
     }
 
     [HttpPost("create")]

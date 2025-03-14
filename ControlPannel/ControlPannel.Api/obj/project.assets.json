@@ -5289,11 +5289,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+      "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
       "projectName": "ControlPannel.Api",
-      "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+      "projectPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
       "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\controlpannel.api\\obj\\",
+      "outputPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\controlpannel.api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5311,8 +5311,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
-              "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
+            "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
+              "projectPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
             },
             "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"

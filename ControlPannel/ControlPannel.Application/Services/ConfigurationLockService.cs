@@ -1,11 +1,12 @@
-using System;
+using System.Linq.Expressions;
 using AutoMapper;
+using controlpannel.application.Dtos;
 using controlpannel.application.Dtos.ConfigurationLockDtos;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
 
-
 namespace controlpannel.application.Services;
+
 public class ConfigurationLockService
 {
     private readonly IConfigurationLockRepository _repository;
@@ -17,9 +18,17 @@ public class ConfigurationLockService
         _mapper = mapper;
     }
 
-    public async Task<List<ConfigurationLockDto>> GetAllByApplicationIdAsync(long applicationId)
+    public async Task<List<ConfigurationLockDto>> GetAllByApplicationIdAsync(long applicationId, string sortByField, bool descending)
     {
-        var locks = await _repository.GetAllAsync(applicationId);
+        Expression<Func<ConfigurationLock, object>> sortExpression = sortByField.ToLower() switch
+        {
+            "locktimeinterval" => cl => cl.LockTimeInterval,
+            "failedloginamountbeforecaptcha" => cl => cl.FailedLoginAmountBeforeCaptcha,
+            "captchaneeded" => cl => cl.CaptchaNeeded,
+            _ => cl => cl.Id // Default sorting by Id
+        };
+
+        var locks = await _repository.GetAllAsync(applicationId, sortExpression, descending);
         return _mapper.Map<List<ConfigurationLockDto>>(locks);
     }
 

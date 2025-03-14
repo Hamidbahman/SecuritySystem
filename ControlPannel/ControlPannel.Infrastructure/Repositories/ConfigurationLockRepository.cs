@@ -1,10 +1,8 @@
-using System;
+using System.Linq.Expressions;
 using ControlPannel.Infrastructure.Data;
 using ControlPannel.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using controlpannel.domain.RepositoryInterfaces;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace controlpannel.infrastructure.Repositories;
 
@@ -24,11 +22,14 @@ public class ConfigurationLockRepository : IConfigurationLockRepository
             .FirstOrDefaultAsync(cl => cl.Id == id);
     }
 
-    public async Task<List<ConfigurationLock>> GetAllAsync(long applicationId)
+    public async Task<List<ConfigurationLock>> GetAllAsync(long applicationId, Expression<Func<ConfigurationLock, object>> sortBy, bool descending)
     {
-        return await _context.ConfigurationLocks
-            .Where(cl => cl.ApplicationId == applicationId)
-            .ToListAsync();
+        IQueryable<ConfigurationLock> query = _context.ConfigurationLocks
+            .Where(cl => cl.ApplicationId == applicationId);
+
+        query = descending ? query.OrderByDescending(sortBy) : query.OrderBy(sortBy);
+
+        return await query.ToListAsync();
     }
 
     public async Task AddAsync(ConfigurationLock configurationLock)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {}
+    "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
         "projectName": "ControlPannel.Domain",
-        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj",
         "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",

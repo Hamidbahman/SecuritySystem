@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
 using ControlPannel.Infrastructure.Data;
@@ -23,16 +20,13 @@ namespace controlpannel.infrastructure.Repositories
             return await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<List<Aplication>> GetAllAsync(string? sortField = null, bool descending = false)
+        // ✅ Now accepts Expression<Func<T, object>> directly
+        public async Task<List<Aplication>> GetAllAsync(Expression<Func<Aplication, object>> sortBy, bool descending)
         {
             IQueryable<Aplication> query = _context.Applications;
-            
-            if (!string.IsNullOrEmpty(sortField))
-            {
-                query = descending ? query.OrderByDescending(a => EF.Property<object>(a, sortField))
-                                    : query.OrderBy(a => EF.Property<object>(a, sortField));
-            }
-            
+
+            query = descending ? query.OrderByDescending(sortBy) : query.OrderBy(sortBy);
+
             return await query.ToListAsync();
         }
 
@@ -66,6 +60,9 @@ namespace controlpannel.infrastructure.Repositories
             return true;
         }
 
-
+        public Task<List<Aplication>> GetAllAsync(string? sortField = null, bool descending = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

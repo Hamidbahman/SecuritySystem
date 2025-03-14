@@ -1,5 +1,7 @@
 using Authentication.Application;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace Authentication.Application
@@ -9,31 +11,48 @@ namespace Authentication.Application
     public class AuthController : ControllerBase
     {
         private readonly OAuthService _authService;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(OAuthService authService)
+        public AuthController(OAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("generate-auth-code")]
         public async Task<IActionResult> GenerateAuthCode([FromBody] AuthCodeRequest request)
         {
-            var authCode = await _authService.GenerateAuthorizationCodeAsync(request.ClientId, request.ClientSecret, request.UserCaptchaToken);
+            var result = await _authService.GenerateAuthorizationCodeAsync(request.ClientId, request.ClientSecret, request.UserCaptchaToken);
 
-            if (authCode == null) return Unauthorized(new { Message = "Invalid client credentials." });
-            if (authCode == "InvalidCaptcha") return BadRequest(new { Message = "Invalid Captcha." });
+            if (result == null || !result.Success)
+                return Unauthorized(new { Message = result?.Message ?? "Invalid client credentials or rate-limited. Try again later." });
 
-            return Ok(new { AuthorizationCode = authCode });
+            return Ok(new
+            {
+                AuthorizationCode = result.AuthorizationCode,
+                Application = result.ApplicationDetails
+            });
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             var result = await _authService.LoginAsync(request.Username, request.Password, request.AuthenticationCode);
-            if (result.Success) return Ok(new { Token = result.Token });
-            if (result.TwoFactorRequired) return Unauthorized(new { Message = "OTP required." });
 
-            return Unauthorized(new { Message = result.Message });
+            if (!result.Success)
+            {
+                if (result.TwoFactorRequired)
+                    return Unauthorized(new { Message = "OTP required." });
+
+                return Unauthorized(new { Message = result.Message });
+            }
+
+            return Ok(new
+            {
+                Token = result.Token,
+                User = result.User,
+                Application = result.Application
+            });
         }
 
         [HttpPost("send-otp")]
@@ -41,16 +60,15 @@ namespace Authentication.Application
         {
             try
             {
-                var otpCode = await _authService.SendOtpAsync(request.PhoneNumber);
-        
-                return Ok(new { Message = "OTP sent successfully.", OtpCode = otpCode });
+                await _authService.SendOtpAsync(request.PhoneNumber);
+                return Ok(new { Message = "OTP sent successfully." });
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error sending OTP.");
                 return BadRequest(new { Message = "Failed to send OTP. Please try again later.", Error = ex.Message });
             }
         }
-
 
         [HttpPost("verify-otp")]
         public async Task<IActionResult> VerifyOtp([FromBody] OtpRequest request)
@@ -61,38 +79,35 @@ namespace Authentication.Application
             return Unauthorized(new { Message = result.Message });
         }
 
-
-    [HttpPost("change-password")]
-    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest model)
-    {
-        if (model == null)
-            return BadRequest("Invalid request.");
-
-        try
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest model)
         {
-            var result = await _authService.ChangePassword(model.Username, model.ExPassword, model.NewPassword, model.ConfirmPassword);
+            if (model == null)
+                return BadRequest(new { Message = "Invalid request." });
 
-            if (!result.Success)
-                return BadRequest(new { result.Message });
+            try
+            {
+                var result = await _authService.ChangePassword(model.Username, model.ExPassword, model.NewPassword, model.ConfirmPassword);
 
-            return Ok(new { result.Message });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { Message = "An error occurred.", Error = ex.Message });
+                if (!result.Success)
+                    return BadRequest(new { Message = result.Message });
+
+                return Ok(new { Message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error changing password.");
+                return StatusCode(500, new { Message = "An error occurred.", Error = ex.Message });
+            }
         }
     }
 
-}
-
-public class ChangePasswordRequest
-{
-    public string Username { get; set; }
-    public string ExPassword { get; set; }
-    public string NewPassword { get; set; }
-    public string ConfirmPassword { get; set; }
-}
-
+    public class ChangePasswordRequest
+    {
+        public string Username { get; set; }
+        public string ExPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 
     public class AuthCodeRequest
@@ -116,5 +131,6 @@ public class ChangePasswordRequest
 
     public class SendOtpRequest
     {
-        public string PhoneNumber{get;set;}
+        public string PhoneNumber { get; set; }
     }
+}

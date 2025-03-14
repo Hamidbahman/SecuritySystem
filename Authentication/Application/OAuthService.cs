@@ -50,39 +50,68 @@ namespace Authentication.Application
             _redis = redis.GetDatabase();
         }
 
-        public async Task<string?> GenerateAuthorizationCodeAsync(string clientId, string clientSecret, string? userCaptchaToken = null)
+public async Task<ApplicationAuthResult?> GenerateAuthorizationCodeAsync(string clientId, string clientSecret, string? userCaptchaToken = null)
+{
+    if (await IsRateLimited(clientId))
+    {
+        return new ApplicationAuthResult { Message = "Please wait before generating another code.", Success = false };
+    }
+
+    var application = await _applicationRepository.GetApplicationByClientIdAsync(clientId);
+    if (application == null || !VerifyHashedSecret(clientSecret, application.ClientSecret))
+        return new ApplicationAuthResult { Message = "Invalid client credentials.", Success = false };
+
+    var configLock = await _applicationRepository.GetConfigurationLockAsync(clientId);
+    await _applicationRepository.SaveChangesAsync();
+
+    if (configLock.CaptchaNeeded)
+    {
+        if (string.IsNullOrEmpty(userCaptchaToken))
+            return new ApplicationAuthResult { Message = _checkBox.GenerateCaptchaToken(), Success = false };
+
+        if (!_checkBox.ValidateCaptchaToken(userCaptchaToken))
+            return new ApplicationAuthResult { Message = "Invalid Captcha", Success = false };
+    }
+
+    await _redis.StringSetAsync($"rate_limit:{clientId}", DateTime.UtcNow.ToString(), TimeSpan.FromSeconds(30));
+
+    string authCode = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
+    string encryptedAuthCode = EncryptAuthCode(authCode);
+    _authCodes.TryAdd(authCode, clientId);
+
+    await _redis.StringSetAsync($"auth_code:{encryptedAuthCode}", clientId, TimeSpan.FromMinutes(10));
+
+    return new ApplicationAuthResult
+    {
+        Success = true,
+        AuthorizationCode = authCode,
+        ApplicationDetails = new ApplicationDetails
         {
-            if (await IsRateLimited(clientId))
-            {
-                return "Please wait before generating another code.";
-            }
-
-            var application = await _applicationRepository.GetApplicationByClientIdAsync(clientId);
-            if (application == null || !VerifyHashedSecret(clientSecret, application.ClientSecret))
-                return null;
-
-            var configLock = await _applicationRepository.GetConfigurationLockAsync(clientId);
-            await _applicationRepository.SaveChangesAsync();
-
-            if (configLock.CaptchaNeeded)
-            {
-                if (string.IsNullOrEmpty(userCaptchaToken))
-                    return _checkBox.GenerateCaptchaToken();
-
-                if (!_checkBox.ValidateCaptchaToken(userCaptchaToken))
-                    return "InvalidCaptcha";
-            }
-
-            await _redis.StringSetAsync($"rate_limit:{clientId}", DateTime.UtcNow.ToString(), TimeSpan.FromSeconds(30));
-
-            string authCode = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
-            string encryptedAuthCode = EncryptAuthCode(authCode);
-            _authCodes.TryAdd(authCode, clientId);
-
-            await _redis.StringSetAsync($"auth_code:{encryptedAuthCode}", clientId, TimeSpan.FromMinutes(10));
-
-            return authCode;
+            Id = application.Id,
+            Name = application.Title,
+            Description = application.Description,
+            ClientId = application.ClientId
         }
+    };
+}
+
+public class ApplicationAuthResult
+{
+    public bool Success { get; set; }
+    public string? AuthorizationCode { get; set; }
+    public string? Message { get; set; }
+    public ApplicationDetails? ApplicationDetails { get; set; }
+}
+
+public class ApplicationDetails
+{
+    public long Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string ClientId { get; set; }
+}
+
+
 
         private async Task<bool> IsRateLimited(string clientId)
         {

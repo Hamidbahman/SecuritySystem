@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {}
+    "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {}
   },
   "projects": {
     "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Domain\\ControlPannel.Domain.csproj": {
@@ -66,14 +66,14 @@
         }
       }
     },
-    "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
+    "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
         "projectName": "ControlPannel.Infrastructure",
-        "projectPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\securitySystem\\SecuritySystem\\controlpannel\\ControlPannel.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Dr\\securitySystem\\securitySystem\\controlpannel\\ControlPannel.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",

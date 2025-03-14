@@ -4,9 +4,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
+using controlpannel.application.Dtos;
 using controlpannel.Application.Dtos;
 using controlpannel.domain.RepositoryInterfaces;
 using ControlPannel.Domain.Entities;
+using ControlPannel.Domain.Enums;
 
 namespace controlpannel.application.Services
 {
@@ -34,20 +36,19 @@ namespace controlpannel.application.Services
             return application != null ? _mapper.Map<ApplicationDto>(application) : null;
         }
 
-        public async Task<List<ApplicationDto>> GetAllApplicationsAsync(string? sortField = null, bool descending = false)
+        public async Task<List<ApplicationDto>> GetAllApplicationsAsync(AplicationSortingRequestDto sortingRequest)
         {
-            // ✅ Define Expression<Func<T, object>> for sorting
-            Expression<Func<Aplication, object>> sortExpression = sortField?.ToLower() switch
+            Expression<Func<Aplication, object>> sortExpression = sortingRequest.SortField?.ToLower() switch
             {
                 "title" => a => a.Title,
                 "clientid" => a => a.ClientId,
                 "status" => a => a.Status,
                 "createdate" => a => a.CreateDate,
                 "modifydate" => a => a.ModifyDate,
-                _ => a => a.Id // Default sorting by Id
+                _ => a => a.Id
             };
 
-            var applications = await _appRepo.GetAllAsync(sortExpression, descending);
+            var applications = await _appRepo.GetAllAsync(sortExpression, sortingRequest.Descending);
             return _mapper.Map<List<ApplicationDto>>(applications);
         }
 
@@ -55,6 +56,7 @@ namespace controlpannel.application.Services
         {
             var application = await _appRepo.GetByIdAsync(dto.Id);
             if (application == null) return false;
+
             _mapper.Map(dto, application);
             await _appRepo.UpdateAsync(application);
             return true;

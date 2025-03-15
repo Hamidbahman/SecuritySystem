@@ -73,7 +73,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("ApplicationPackageId");
 
-                    b.ToTable("Actees");
+                    b.ToTable("tbActee");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Aplication", b =>
@@ -153,7 +153,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Applications");
+                    b.ToTable("tbApplications");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.ApplicationPackage", b =>
@@ -191,7 +191,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("ApplicationPackages");
+                    b.ToTable("tbApplicationPackage");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.BiometricType", b =>
@@ -396,7 +396,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("Masks");
+                    b.ToTable("tbMask");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Menu", b =>
@@ -442,7 +442,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("ActeeId");
 
-                    b.ToTable("Menus");
+                    b.ToTable("tbMenu");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.OauthToken", b =>
@@ -537,7 +537,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("tbPermission");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Role", b =>
@@ -594,7 +594,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("tbRole");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Service", b =>
@@ -683,7 +683,7 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("tbUser");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.UserBiometric", b =>
@@ -791,7 +791,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("tbUserRole");
                 });
 
             modelBuilder.Entity("controlpannel.domain.Entities.LoginPolicy", b =>
@@ -833,7 +833,7 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LoginPolicies");
+                    b.ToTable("tbLoginPolicy");
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Actee", b =>

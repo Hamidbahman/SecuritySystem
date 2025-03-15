@@ -27,11 +27,12 @@ public class ConfigurationPasswordRepository : IConfigurationPasswordRepository
         IQueryable<ConfigurationPassword> query = _context.ConfigurationPasswords
             .Where(cp => cp.ApplicationId == applicationId);
 
-        // ✅ Uses Expression<Func<T, object>> for sorting dynamically
         query = descending ? query.OrderByDescending(sortBy) : query.OrderBy(sortBy);
 
         return await query.ToListAsync();
     }
+
+
 
     public async Task AddAsync(ConfigurationPassword configurationPassword)
     {

@@ -8,7 +8,6 @@ public class AddConfigurationPasswordRequestDto
 {
     [Required]
     public long ApplicationId { get; set; }
-
     public bool IsComplex { get; set; }
     public bool MustBeChangedInFirstLogin { get; set; }
     public bool MustContainChar { get; set; }

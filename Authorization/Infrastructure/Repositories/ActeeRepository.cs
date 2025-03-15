@@ -29,8 +29,8 @@ namespace Infrastructure.Repositories;
         public async Task<List<Actee>> GetActeesByApplicationPackageIdAsync(long applicationPackageId)
     {
         return await dbContext.Actees
-                             .Where(a => a.ApplicationPackageId == applicationPackageId)
-                             .ToListAsync();
+            .Where(a => a.ApplicationPackageId == applicationPackageId)
+            .ToListAsync();
     }
 
     public Task<Actee> GetByIdAsync(long id)

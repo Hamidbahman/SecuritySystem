@@ -36,6 +36,7 @@ public class ConfigurationPasswordController : ControllerBase
         return Ok(passwordConfig);
     }
 
+
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] AddConfigurationPasswordRequestDto dto)
     {

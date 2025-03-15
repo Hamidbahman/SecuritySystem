@@ -17,7 +17,6 @@ namespace controlpannel.api.Controllers
             _applicationService = applicationService;
         }
 
-        /// ✅ Create a new application
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] AddApplicationRequestDto dto)
         {
@@ -28,7 +27,6 @@ namespace controlpannel.api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application);
         }
 
-        /// ✅ Get an application by ID
         [HttpPost("getById")]
         public async Task<IActionResult> GetById([FromBody] long id)
         {
@@ -38,18 +36,14 @@ namespace controlpannel.api.Controllers
             return Ok(application);
         }
 
-        /// ✅ Get all applications with sorting
-        [HttpPost("getAll")]
-        public async Task<IActionResult> GetAll([FromBody] AplicationSortingRequestDto sortingRequest)
-        {
-            var applications = await _applicationService.GetAllApplicationsAsync(
-                sortingRequest.SortField, 
-                sortingRequest.Descending
-            );
-            return Ok(applications);
-        }
+[HttpPost("getAll")]
+public async Task<IActionResult> GetAll([FromBody] AplicationSortingRequestDto sortingRequest)
+{
+    var applications = await _applicationService.GetAllApplicationsAsync(sortingRequest);
+    return Ok(applications);
+}
 
-        /// ✅ Update an existing application
+
         [HttpPost("update")]
         public async Task<IActionResult> Update([FromBody] UpdateApplicationRequestDto dto)
         {
@@ -63,7 +57,6 @@ namespace controlpannel.api.Controllers
             return NoContent();
         }
 
-        /// ✅ Delete an application
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromBody] long id)
         {

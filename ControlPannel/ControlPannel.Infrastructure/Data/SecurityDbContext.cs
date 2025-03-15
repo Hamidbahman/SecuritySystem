@@ -33,7 +33,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     base.OnModelCreating(modelBuilder);
 
-    // Fluent API for User
     modelBuilder.Entity<User>(entity =>
     {
         entity.HasKey(u => u.Id);
@@ -48,7 +47,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasMany(u => u.UserRoles)
             .WithOne(ur => ur.User)
             .HasForeignKey(ur => ur.UserId)
-            .OnDelete(DeleteBehavior.Cascade);  // Safe to cascade delete users
+            .OnDelete(DeleteBehavior.Cascade);  
 
         entity.HasIndex(u => u.Email).IsUnique();
     });
@@ -63,15 +62,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasMany(r => r.UserRoles)
             .WithOne(ur => ur.Role)
             .HasForeignKey(ur => ur.RoleId)
-            .OnDelete(DeleteBehavior.NoAction);  // Prevents cycle
+            .OnDelete(DeleteBehavior.NoAction);  
 
         entity.HasMany(r => r.Permissions)
             .WithOne(p => p.Role)
             .HasForeignKey(p => p.RoleId)
-            .OnDelete(DeleteBehavior.NoAction);  // Prevents cycle
+            .OnDelete(DeleteBehavior.NoAction); 
     });
 
-    // Fluent API for UserRole
     modelBuilder.Entity<UserRole>(entity =>
     {
         entity.HasKey(ur => ur.Id);
@@ -84,10 +82,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasOne(ur => ur.Role)
             .WithMany(r => r.UserRoles)
             .HasForeignKey(ur => ur.RoleId)
-            .OnDelete(DeleteBehavior.NoAction);  // Prevents cycle
+            .OnDelete(DeleteBehavior.NoAction);  
     });
 
-    // Fluent API for Permission
     modelBuilder.Entity<Permission>(entity =>
     {
         entity.HasKey(p => p.Id);
@@ -95,15 +92,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasOne(p => p.Actee)
             .WithMany(a => a.Permissions)
             .HasForeignKey(p => p.ActeeId)
-            .OnDelete(DeleteBehavior.Cascade); // Safe
+            .OnDelete(DeleteBehavior.Cascade); 
 
         entity.HasOne(p => p.Role)
             .WithMany(r => r.Permissions)
             .HasForeignKey(p => p.RoleId)
-            .OnDelete(DeleteBehavior.NoAction); // Prevents cycle
+            .OnDelete(DeleteBehavior.NoAction);
     });
 
-    // Fluent API for Actee
     modelBuilder.Entity<Actee>(entity =>
     {
         entity.HasKey(a => a.Id);
@@ -122,7 +118,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // Fluent API for Menu
     modelBuilder.Entity<Menu>(entity =>
     {
         entity.HasKey(m => m.Id);
@@ -135,7 +130,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // Fluent API for Mask
     modelBuilder.Entity<Mask>(entity =>
     {
         entity.HasKey(m => m.Id);
@@ -146,7 +140,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // Fluent API for ApplicationPackage
     modelBuilder.Entity<ApplicationPackage>(entity =>
     {
         entity.HasKey(ap => ap.Id);
@@ -166,7 +159,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // ✅ ConfigurationSession
     modelBuilder.Entity<ConfigurationSession>(entity =>
     {
         entity.HasKey(cs => cs.Id);
@@ -202,165 +194,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-
-
-            // Seeding the tables with sample data
-
-            // Seeding Users
-            modelBuilder.Entity<User>().HasData(
-                new User(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    uuid: "user-1",
-                    firstName: "John",
-                    lastName: "Doe",
-                    nationalCode: "1234567890",
-                    email: "admin@example.com",
-                    phoneNumber: "1234567890",
-                    description: "Administrator User"
-                )
-            );
-
-            // Seeding Applications
-            modelBuilder.Entity<Aplication>().HasData(
-                new Aplication(
-                    applicationPackages: new List<ApplicationPackage>(),
-                    roles: new List<Role>(),
-                    id: 1,
-                    title: "Main Application",
-                    clientId: "client-1",
-                    redirectUrls: "https://app.example.com",
-                    clientScope: "read,write",
-                    clientSecret: "secret-key",
-                    authenticateGrantType: "password",
-                    ipRange: "192.168.1.0/24",
-                    isAutoApprove: true,
-                    scheduled: "00:00-23:59",
-                    status: StatusTypes.Active,
-                    lockEnabled: true,
-                    description: "Primary Application",
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null
-                )
-            );
-
-            // Seeding Roles
-            modelBuilder.Entity<Role>().HasData(
-                new Role(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    uuid: "role-1",
-                    authority: AuthorityType.All,
-                    title: "Administrator",
-                    description: "Admin role with full permissions",
-                    status: StatusTypes.Active,
-                    applicationId: 1,
-                    isAdmin: true
-                )
-            );
-
-            // Seeding UserRoles
-            modelBuilder.Entity<UserRole>().HasData(
-                new UserRole(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    userId: 1,
-                    roleId: 1,
-                    isDefault: true
-                )
-            );
-
-            // Seeding Permissions
-            modelBuilder.Entity<Permission>().HasData(
-                new Permission(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    acteeId: 1,
-                    roleId: 1,
-                    status: StatusTypes.Active,
-                    granting: 1
-                )
-            );
-
-            // Seeding Application Packages
-            modelBuilder.Entity<ApplicationPackage>().HasData(
-                new ApplicationPackage(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    title: "Basic Package",
-                    applicationId: 1
-                )
-            );
-
-            // Seeding Actees
-            modelBuilder.Entity<Actee>().HasData(
-                new Actee(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    uuid: "actee-1",
-                    acteeType: ActeeTypes.Menu,
-                    title: "Admin Dashboard",
-                    description: "Administrator Panel",
-                    status: StatusTypes.Active,
-                    applicationPackageId: 1
-                )
-            );
-
-            // Seeding Menus
-            modelBuilder.Entity<Menu>().HasData(
-                new Menu(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    menuKey: "menu-1",
-                    priority: 1,
-                    icon: "admin_icon",
-                    acteeId: 1
-                )
-            );
-
-            // Seeding Masks
-            modelBuilder.Entity<Mask>().HasData(
-                new Mask(
-                    id: 1,
-                    createDate: new DateTime(2023, 1, 1),
-                    modifyDate: new DateTime(2023, 1, 1),
-                    deleteDate: null,
-                    deleteUser: null,
-                    modifyUser: null,
-                    permissionId: 1
-                )
-            );
+  
         }
     }
 

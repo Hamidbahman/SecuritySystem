@@ -4,6 +4,6 @@ namespace controlpannel.application.Dtos;
 
     public class AplicationSortingRequestDto
     {
-        public string? SortField { get; set; }
+        public string? SortByField { get; set; }
         public bool Descending { get; set; }
     }

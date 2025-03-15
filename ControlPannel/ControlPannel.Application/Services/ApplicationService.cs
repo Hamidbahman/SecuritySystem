@@ -38,7 +38,7 @@ namespace controlpannel.application.Services
 
         public async Task<List<ApplicationDto>> GetAllApplicationsAsync(AplicationSortingRequestDto sortingRequest)
         {
-            Expression<Func<Aplication, object>> sortExpression = sortingRequest.SortField?.ToLower() switch
+            Expression<Func<Aplication, object>> sortExpression = sortingRequest.SortByField?.ToLower() switch
             {
                 "title" => a => a.Title,
                 "clientid" => a => a.ClientId,

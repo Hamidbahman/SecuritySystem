@@ -17,35 +17,31 @@ namespace Application.Controllers
             _userAccessService = userAccessService;
         }
 
-        // POST api/access (Get User Access with Mask IDs)
-        [HttpPost("user-access")]
+]        [HttpPost("user-access")]
         public async Task<IActionResult> GetUserAccess([FromBody] UserAccessRequest request)
         {
             try
             {
-                // Call the service to get the user access
                 var result = await _userAccessService.GetUserAccessAsync(request.UserId, request.ClientId);
-                return Ok(result);  // Return the list of mask IDs as a response
+                return Ok(result);  
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(new { error = ex.Message });  // Return the error message in case of an exception
+                return BadRequest(new { error = ex.Message });  
             }
         }
 
-        // POST api/access/applications (Get Applications for the User)
         [HttpPost("user-applications")]
         public async Task<IActionResult> GetUserApplications([FromBody] UserApplicationsRequest request)
         {
             try
             {
-                // Call the service to get the applications based on userId
                 var result = await _userAccessService.GetUserApplicationsAsync(request.UserId);
-                return Ok(result);  // Return the list of applications associated with the user
+                return Ok(result);  
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(new { error = ex.Message });  // Return the error message in case of an exception
+                return BadRequest(new { error = ex.Message });  
             }
         }
     }

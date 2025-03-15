@@ -25,7 +25,7 @@ public class ConfigurationLockService
             "locktimeinterval" => cl => cl.LockTimeInterval,
             "failedloginamountbeforecaptcha" => cl => cl.FailedLoginAmountBeforeCaptcha,
             "captchaneeded" => cl => cl.CaptchaNeeded,
-            _ => cl => cl.Id // Default sorting by Id
+            _ => cl => cl.Id // 
         };
 
         var locks = await _repository.GetAllAsync(applicationId, sortExpression, descending);

@@ -22,11 +22,11 @@ namespace ControlPannel.Infrastructure.Migrations
                     ClientId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ClientScope = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ClientSecret = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    AuthorizationGrandType = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    AuthorizationGrandType = table.Column<int>(type: "int", nullable: false),
                     IpRange = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsAutoApprove = table.Column<bool>(type: "bit", nullable: false),
                     Scheduled = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Status = table.Column<short>(type: "smallint", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     LockEnabled = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -491,51 +491,6 @@ namespace ControlPannel.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Applications",
-                columns: new[] { "Id", "AuthorizationGrandType", "ClientId", "ClientScope", "ClientSecret", "CreateDate", "DeleteDate", "DeleteUser", "Description", "IpRange", "IsAutoApprove", "LockEnabled", "ModifyDate", "ModifyUser", "RedirectUrls", "Scheduled", "Status", "Title" },
-                values: new object[] { 1L, "password", "client-1", "read,write", "secret-key", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Primary Application", "192.168.1.0/24", true, true, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "https://app.example.com", "00:00-23:59", (short)1, "Main Application" });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "CreateDate", "DeleteDate", "DeleteUser", "Description", "Email", "FirstName", "LastName", "ModifyDate", "ModifyUser", "NationalCode", "PhoneNumber", "Uuid" },
-                values: new object[] { 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Administrator User", "admin@example.com", "John", "Doe", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "1234567890", "1234567890", "user-1" });
-
-            migrationBuilder.InsertData(
-                table: "ApplicationPackages",
-                columns: new[] { "Id", "ApplicationId", "CreateDate", "DeleteDate", "DeleteUser", "ModifyDate", "ModifyUser", "Title" },
-                values: new object[] { 1L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Basic Package" });
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "ApplicationId", "Authority", "CreateDate", "DeleteDate", "DeleteUser", "Description", "IsAdmin", "ModifyDate", "ModifyUser", "Status", "Title", "Uuid" },
-                values: new object[] { 1L, 1L, 0, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Admin role with full permissions", true, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, "Administrator", "role-1" });
-
-            migrationBuilder.InsertData(
-                table: "Actees",
-                columns: new[] { "Id", "ActeeType", "ApplicationPackageId", "CreateDate", "DeleteDate", "DeleteUser", "Description", "ModifyDate", "ModifyUser", "StatusType", "Title", "Uuid" },
-                values: new object[] { 1L, 0, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Administrator Panel", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 0, "Admin Dashboard", "actee-1" });
-
-            migrationBuilder.InsertData(
-                table: "UserRoles",
-                columns: new[] { "Id", "CreateDate", "DeleteDate", "DeleteUser", "IsDefault", "ModifyDate", "ModifyUser", "RoleId", "UserId" },
-                values: new object[] { 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, true, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1L, 1L });
-
-            migrationBuilder.InsertData(
-                table: "Menus",
-                columns: new[] { "Id", "ActeeId", "CreateDate", "DeleteDate", "DeleteUser", "Icon", "MenuKey", "ModifyDate", "ModifyUser", "Priority" },
-                values: new object[] { 1L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "admin_icon", "menu-1", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Permissions",
-                columns: new[] { "Id", "ActeeId", "CreateDate", "DeleteDate", "DeleteUser", "Granting", "ModifyDate", "ModifyUser", "RoleId", "Status" },
-                values: new object[] { 1L, 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1L, 0 });
-
-            migrationBuilder.InsertData(
-                table: "Masks",
-                columns: new[] { "Id", "CreateDate", "DeleteDate", "DeleteUser", "ModifyDate", "ModifyUser", "PermissionId" },
-                values: new object[] { 1L, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Actees_ApplicationPackageId",

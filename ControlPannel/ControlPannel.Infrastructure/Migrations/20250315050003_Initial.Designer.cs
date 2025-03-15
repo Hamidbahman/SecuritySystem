@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControlPannel.Infrastructure.Migrations
 {
     [DbContext(typeof(SecurityDbContext))]
-    [Migration("20250313154449_Active")]
-    partial class Active
+    [Migration("20250315050003_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,20 +77,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("ApplicationPackageId");
 
                     b.ToTable("Actees");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ActeeType = 0,
-                            ApplicationPackageId = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Administrator Panel",
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusType = 0,
-                            Title = "Admin Dashboard",
-                            Uuid = "actee-1"
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Aplication", b =>
@@ -101,10 +87,8 @@ namespace ControlPannel.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("AuthorizationGrandType")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<int>("AuthorizationGrandType")
+                        .HasColumnType("int");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
@@ -173,26 +157,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Applications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AuthorizationGrandType = "password",
-                            ClientId = "client-1",
-                            ClientScope = "read,write",
-                            ClientSecret = "secret-key",
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Primary Application",
-                            IpRange = "192.168.1.0/24",
-                            IsAutoApprove = true,
-                            LockEnabled = true,
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RedirectUrls = "https://app.example.com",
-                            Scheduled = "00:00-23:59",
-                            Status = 0,
-                            Title = "Main Application"
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.ApplicationPackage", b =>
@@ -231,16 +195,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.ToTable("ApplicationPackages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ApplicationId = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Basic Package"
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.BiometricType", b =>
@@ -446,15 +400,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("PermissionId");
 
                     b.ToTable("Masks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PermissionId = 1L
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Menu", b =>
@@ -501,18 +446,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("ActeeId");
 
                     b.ToTable("Menus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ActeeId = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Icon = "admin_icon",
-                            MenuKey = "menu-1",
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Priority = 1
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.OauthToken", b =>
@@ -608,18 +541,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ActeeId = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Granting = 1,
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoleId = 1L,
-                            Status = 0
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Role", b =>
@@ -677,21 +598,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ApplicationId = 1L,
-                            Authority = 0,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Admin role with full permissions",
-                            IsAdmin = true,
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 0,
-                            Title = "Administrator",
-                            Uuid = "role-1"
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.Service", b =>
@@ -781,21 +687,6 @@ namespace ControlPannel.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Administrator User",
-                            Email = "admin@example.com",
-                            FirstName = "John",
-                            LastName = "Doe",
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NationalCode = "1234567890",
-                            PhoneNumber = "1234567890",
-                            Uuid = "user-1"
-                        });
                 });
 
             modelBuilder.Entity("ControlPannel.Domain.Entities.UserBiometric", b =>
@@ -904,17 +795,6 @@ namespace ControlPannel.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreateDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDefault = true,
-                            ModifyDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            RoleId = 1L,
-                            UserId = 1L
-                        });
                 });
 
             modelBuilder.Entity("controlpannel.domain.Entities.LoginPolicy", b =>

@@ -51,7 +51,6 @@ namespace Authentication.Application
             {
                 Token = result.Token,
                 User = result.User,
-                Application = result.Application
             });
         }
 

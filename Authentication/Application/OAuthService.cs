@@ -88,7 +88,7 @@ public async Task<ApplicationAuthResult?> GenerateAuthorizationCodeAsync(string 
         ApplicationDetails = new ApplicationDetails
         {
             Id = application.Id,
-            Name = application.Title,
+            Title = application.Title,
             Description = application.Description,
             ClientId = application.ClientId
         }
@@ -106,7 +106,7 @@ public class ApplicationAuthResult
 public class ApplicationDetails
 {
     public long Id { get; set; }
-    public string Name { get; set; }
+    public string Title { get; set; }
     public string Description { get; set; }
     public string ClientId { get; set; }
 }

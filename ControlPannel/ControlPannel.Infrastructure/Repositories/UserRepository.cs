@@ -1,88 +1,95 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using ControlPannel.Domain.Entities;
-using ControlPannel.Domain.Enums;
 using ControlPannel.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace controlpannel.infrastructure.Repositories;
-
-public class RoleRepository : IRoleRepository
+namespace Authentication.Infrastructure.Repositories
 {
-    private readonly SecurityDbContext dbContext;
-
-        public Task AddAsync(Role role)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ExistsAsync(string uuid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Role>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Role>> GetByApplicationIdAsync(long applicationId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Role?> GetByIdAsync(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Role>> GetByStatusAsync(StatusTypes status)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Role?> GetByUuidAsync(string uuid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Permission>> GetPermissionsByRoleIdsAsync(List<long> roleIds)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Role?> GetRoleByIdAsync(long roleId)
+    public class UserRepository : IUserRepository
     {
-        return await dbContext.Roles
-            .Include(r => r.Permissions)
-            .FirstOrDefaultAsync(r => r.Id == roleId);
-    }
+        private readonly SecurityDbContext _context;
 
-        public Task<List<Role>> GetRolesByApplicationIdAsync(long applicationId)
+        public UserRepository(SecurityDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<User?> GetByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .AsSplitQuery()
+                .Include(u => u.UserProperty)  // Load UserProperty (password stored here)
+                .Include(u => u.LoginPolicy)  // Load LoginPolicy for rules
+                .FirstOrDefaultAsync(u => u.Username == username);        
         }
 
-        public async Task<List<Role>> GetRolesByUserIdAsync(long userId)
+        public async Task<bool> ValidatePasswordAsync(string username, string password)
+        {
+            var user = await GetByUsernameAsync(username);
+            if (user == null || user.UserProperty == null)
+                return false;
+
+            return user.UserProperty.Password == password; // ⚠️ Use hashing in production!
+        }
+        public async Task<bool> CheckLoginPolicyAsync(string username)
+        {
+            var user = await GetByUsernameAsync(username);
+            if (user == null || user.LoginPolicy == null)
+                return false;
+
+            var policy = user.LoginPolicy;
+            var now = DateTime.UtcNow;
+
+            // Check if the user is locked based on the lock type
+            if (policy.LockTypes == LockTypes.TemporaryLock)
+            {
+                // Check if the current time falls within the lock window
+                if (now >= policy.LockStartDateTime && now <= policy.LockEndDateTime)
+                {
+                    return false; // User is currently locked
+                }
+            }
+            else if (policy.LockTypes == LockTypes.PermanentLock)
+            {
+                return false; // User is permanently locked
+            }
+
+            return true; // User is allowed to log in
+        }
+
+        public async Task<LoginPolicy> GetLoginPoliciesByUserID(string userId)
+        {
+                if (!long.TryParse(userId, out var userIdLong))
+                    return null; // Invalid ID format
+
+                return await _context.LoginPolicies
+                    .FirstOrDefaultAsync(lp => lp.UserId == userIdLong);;        
+        }
+
+        public async Task<(string Username, string Password)?> GetUserCredentialsAsync(string username)
+{
+    var user = await GetByUsernameAsync(username);
+    if (user == null || user.UserProperty == null)
+        return null;
+
+    return (user.Username, user.UserProperty.Password);
+}
+
+    public async Task<bool> SaveChangesAsync()
     {
-        return await dbContext.UserRoles
-            .Where(ur => ur.UserId == userId)
-            .Select(ur => ur.Role)
-            .Include(r => r.Permissions)
-            .ToListAsync();
+
+        return await _context.SaveChangesAsync() > 0;
+
     }
 
-        public Task UpdateAsync(Role role)
+        public async Task<User> GetUserByPhoneNumber(string phoneNumber)
         {
-            throw new NotImplementedException();
+            User user = await _context.Users.FirstOrDefaultAsync(u=>u.PhoneNumber == phoneNumber);
+            return user;
         }
     }
 
+    public interface IUserRepository
+    {
+    }
+}

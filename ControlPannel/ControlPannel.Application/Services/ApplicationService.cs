@@ -30,6 +30,14 @@ namespace controlpannel.application.Services
             return _mapper.Map<ApplicationDto>(application);
         }
 
+        public async Task<ApplicationDto?> GetApplicationByTitle (string title)
+        {
+            var application = await _appRepo.GetAplicationByTitle(title);
+        
+                return application != null ? _mapper.Map<ApplicationDto>(application) : null;
+
+        }
+
         public async Task<ApplicationDto?> GetApplicationByIdAsync(long id)
         {
             var application = await _appRepo.GetByIdAsync(id);

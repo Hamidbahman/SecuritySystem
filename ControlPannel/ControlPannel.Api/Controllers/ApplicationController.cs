@@ -35,6 +35,15 @@ namespace controlpannel.api.Controllers
                 return NotFound($"Application with ID {id} not found.");
             return Ok(application);
         }
+        
+        [HttpPost("getByTitle")]
+        public async Task<IActionResult> GetByTitle([FromBody] string title)
+        {
+            var application = await _applicationService.GetApplicationByTitle(title);
+            if (application == null)
+                return NotFound($"Application with Title {title} not found.");
+            return Ok(application);
+        }
 
 [HttpPost("getAll")]
 public async Task<IActionResult> GetAll([FromBody] AplicationSortingRequestDto sortingRequest)

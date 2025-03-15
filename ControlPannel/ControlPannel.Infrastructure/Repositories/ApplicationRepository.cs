@@ -64,5 +64,10 @@ namespace controlpannel.infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Aplication?> GetAplicationByTitle(string title)
+        {
+            return await _context.Applications.FirstOrDefaultAsync(a => a.Title == title);
+        }
     }
 }

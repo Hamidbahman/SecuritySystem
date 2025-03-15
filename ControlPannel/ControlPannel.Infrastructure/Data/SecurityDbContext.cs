@@ -168,7 +168,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // ✅ ConfigurationPassword
     modelBuilder.Entity<ConfigurationPassword>(entity =>
     {
         entity.HasKey(cp => cp.Id);
@@ -178,7 +177,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             .OnDelete(DeleteBehavior.Cascade);
     });
 
-    // Fluent API for Aplication
     modelBuilder.Entity<Aplication>(entity =>
     {
         entity.HasKey(a => a.Id);

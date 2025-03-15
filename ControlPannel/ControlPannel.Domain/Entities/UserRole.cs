@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbUserRole")]
 public class UserRole : BaseEntity
 {
     public long UserId { get; private set; }

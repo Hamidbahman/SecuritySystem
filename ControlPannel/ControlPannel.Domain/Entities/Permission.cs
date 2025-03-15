@@ -4,6 +4,7 @@ using ControlPannel.Domain.Enums;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbPermission")]
 public class Permission : BaseEntity
 {
     [ForeignKey("ActeeId")]

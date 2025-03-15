@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbMenu")]
 public class Menu : BaseEntity
 {
     public string MenuKey { get; private set; }

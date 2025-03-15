@@ -1,8 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControlPannel.Domain.Entities;
 
-
+[Table("tbUser")]
 public class User : BaseEntity
 {
     public string Uuid { get; private set; }

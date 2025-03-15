@@ -5,6 +5,7 @@ using ControlPannel.Domain.Enums;
 
 namespace controlpannel.domain.Entities;
 
+[Table("tbLoginPolicy")]
 public class LoginPolicy : BaseEntity
 {
     public LockTypes LockTypes { get; private set; }

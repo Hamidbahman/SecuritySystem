@@ -6,6 +6,7 @@ public interface IApplicationRepository
 {        Task<List<Aplication>> GetApplicationsByIdsAsync(List<long> applicationIds);
 
     Task<Aplication?> GetApplicationByIdAsync(long applicationId);
+    Task<Aplication?> GetAplicationByTitle (string title);
 
     Task<IEnumerable<Aplication>> GetAllAsync();
     Task<Aplication?> GetByIdAsync(long id);

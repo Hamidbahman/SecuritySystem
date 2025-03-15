@@ -12,7 +12,7 @@ using controlpannel.domain.Enums;
 
 namespace ControlPannel.Domain.Entities
 {
-    [Table("Applications")]
+    [Table("tbApplications")]
     public class Aplication : BaseEntity
     {
         [Required]

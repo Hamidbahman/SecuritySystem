@@ -1157,9 +1157,9 @@
           }
         }
       },
-      "ControlPannel.Domain/1.0.0": {
+      "controlpannel.domain/1.0.0": {
         "runtime": {
-          "ControlPannel.Domain.dll": {
+          "controlpannel.domain.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1167,13 +1167,13 @@
       },
       "ControlPannel.Infrastructure/1.0.0": {
         "dependencies": {
-          "ControlPannel.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.Design": "9.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.3",
           "Microsoft.Extensions.Configuration": "9.0.3",
-          "Microsoft.Extensions.Configuration.Json": "9.0.3"
+          "Microsoft.Extensions.Configuration.Json": "9.0.3",
+          "controlpannel.domain": "1.0.0"
         },
         "runtime": {
           "ControlPannel.Infrastructure.dll": {
@@ -1832,7 +1832,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ControlPannel.Domain/1.0.0": {
+    "controlpannel.domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

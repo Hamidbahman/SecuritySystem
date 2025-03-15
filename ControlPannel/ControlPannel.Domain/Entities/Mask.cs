@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbMask")]
 public class Mask : BaseEntity
 {
     public long PermissionId { get; private set; }

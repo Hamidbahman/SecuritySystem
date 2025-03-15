@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbApplicationPackage")]
 public class ApplicationPackage : BaseEntity
 {
     [StringLength(100)]

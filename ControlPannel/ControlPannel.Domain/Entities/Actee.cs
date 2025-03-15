@@ -4,6 +4,7 @@ using ControlPannel.Domain.Enums;
 
 namespace ControlPannel.Domain.Entities;
 
+[Table("tbActee")]
 public class Actee : BaseEntity
 {
     public string Uuid { get; private set; }

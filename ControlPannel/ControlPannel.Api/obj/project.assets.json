@@ -1836,27 +1836,27 @@
           "bin/placeholder/ControlPannel.Application.dll": {}
         }
       },
-      "ControlPannel.Domain/1.0.0": {
+      "controlpannel.domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "compile": {
-          "bin/placeholder/ControlPannel.Domain.dll": {}
+          "bin/placeholder/controlpannel.domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ControlPannel.Domain.dll": {}
+          "bin/placeholder/controlpannel.domain.dll": {}
         }
       },
       "ControlPannel.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "ControlPannel.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.Design": "9.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.3",
           "Microsoft.Extensions.Configuration": "9.0.3",
-          "Microsoft.Extensions.Configuration.Json": "9.0.3"
+          "Microsoft.Extensions.Configuration.Json": "9.0.3",
+          "controlpannel.domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ControlPannel.Infrastructure.dll": {}
@@ -5261,10 +5261,10 @@
       "path": "../ControlPannel.Application/ControlPannel.Application.csproj",
       "msbuildProject": "../ControlPannel.Application/ControlPannel.Application.csproj"
     },
-    "ControlPannel.Domain/1.0.0": {
+    "controlpannel.domain/1.0.0": {
       "type": "project",
-      "path": "../ControlPannel.Domain/ControlPannel.Domain.csproj",
-      "msbuildProject": "../ControlPannel.Domain/ControlPannel.Domain.csproj"
+      "path": "../controlpannel.domain/controlpannel.domain.csproj",
+      "msbuildProject": "../controlpannel.domain/controlpannel.domain.csproj"
     },
     "ControlPannel.Infrastructure/1.0.0": {
       "type": "project",
@@ -5290,11 +5290,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+      "projectUniqueName": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
       "projectName": "ControlPannel.Api",
-      "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
+      "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\controlpannel.api\\ControlPannel.Api.csproj",
       "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\controlpannel\\controlpannel.api\\obj\\",
+      "outputPath": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\controlpannel.api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5315,8 +5315,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
-              "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
+            "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj": {
+              "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\ControlPannel.Application\\ControlPannel.Application.csproj"
             },
             "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\controlpannel\\ControlPannel.Infrastructure\\ControlPannel.Infrastructure.csproj"

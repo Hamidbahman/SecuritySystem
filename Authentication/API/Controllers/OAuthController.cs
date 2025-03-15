@@ -133,3 +133,56 @@ namespace Authentication.Application
         public string PhoneNumber { get; set; }
     }
 }
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace Authentication.API.Controllers
+{
+    [ApiController]
+    [Route("api/oauth")]
+    public class OAuthController : ControllerBase
+    {
+        private readonly OAuthService _authService;
+
+        public OAuthController(OAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        [HttpPost("token")]
+        public async Task<IActionResult> GenerateToken([FromBody] TokenRequestModel model)
+        {
+            var clientId = Request.Headers["Client-Id"].ToString();
+            var clientSecret = Request.Headers["Client-Secret"].ToString();
+
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
+            {
+                return BadRequest(new { error = "Client credentials are required." });
+            }
+
+            var authResult = await _authService.LoginAsync(model.Username, model.Password, model.AuthenticationCode, clientId, clientSecret);
+
+            if (!authResult.Success)
+            {
+                return Unauthorized(new { error = authResult.Message });
+            }
+
+            return Ok(new
+            {
+                access_token = authResult.Token,
+                two_factor_required = authResult.TwoFactorRequired
+            });
+        }
+    }
+
+    public class TokenRequestModel
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string AuthenticationCode { get; set; } // Optional for 2FA
+    }
+}

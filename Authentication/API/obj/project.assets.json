@@ -2957,7 +2957,7 @@
           }
         }
       },
-      "Application/1.0.0": {
+      "application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
@@ -2974,13 +2974,13 @@
           "infrastructure": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Application.dll": {}
+          "bin/placeholder/application.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Application.dll": {}
+          "bin/placeholder/application.dll": {}
         }
       },
-      "Domain/1.0.0": {
+      "domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
@@ -2989,21 +2989,21 @@
           "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
         },
         "compile": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/domain.dll": {}
         }
       },
       "infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Microsoft.EntityFrameworkCore.Design": "9.0.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.2",
-          "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
+          "Microsoft.EntityFrameworkCore.Tools": "9.0.2",
+          "domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/infrastructure.dll": {}
@@ -7615,15 +7615,15 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Application/1.0.0": {
+    "application/1.0.0": {
       "type": "project",
-      "path": "../Application/Application.csproj",
-      "msbuildProject": "../Application/Application.csproj"
+      "path": "../application/application.csproj",
+      "msbuildProject": "../application/application.csproj"
     },
-    "Domain/1.0.0": {
+    "domain/1.0.0": {
       "type": "project",
-      "path": "../Domain/Domain.csproj",
-      "msbuildProject": "../Domain/Domain.csproj"
+      "path": "../domain/domain.csproj",
+      "msbuildProject": "../domain/domain.csproj"
     },
     "infrastructure/1.0.0": {
       "type": "project",
@@ -7633,34 +7633,29 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Application >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 2.3.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.2",
       "Swashbuckle.AspNetCore.Swagger >= 7.2.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 7.2.0",
       "Swashbuckle.AspNetCore.SwaggerUI >= 7.2.0",
+      "application >= 1.0.0",
       "infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Dr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\authentication\\api\\API.csproj",
-      "projectName": "API",
-      "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\authentication\\api\\API.csproj",
-      "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\authentication\\api\\obj\\",
+      "projectUniqueName": "C:\\Users\\Dr\\25\\securitySystem\\authentication\\api\\api.csproj",
+      "projectName": "api",
+      "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authentication\\api\\api.csproj",
+      "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dr\\25\\securitySystem\\authentication\\api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7668,17 +7663,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\authentication\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitySystem\\authentication\\Application\\Application.csproj"
+            "C:\\Users\\Dr\\25\\securitySystem\\authentication\\application\\application.csproj": {
+              "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authentication\\application\\application.csproj"
             },
-            "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\authentication\\infrastructure\\infrastructure.csproj": {
-              "projectPath": "C:\\Users\\hamid.RYMOND\\25\\securitysystem\\authentication\\infrastructure\\infrastructure.csproj"
+            "C:\\Users\\Dr\\25\\securitySystem\\authentication\\infrastructure\\infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authentication\\infrastructure\\infrastructure.csproj"
             }
           }
         }

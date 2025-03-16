@@ -50,67 +50,111 @@ namespace Authentication.Application
             _redis = redis.GetDatabase();
         }
 
-public async Task<ApplicationAuthResult?> GenerateAuthorizationCodeAsync(string clientId, string clientSecret, string? userCaptchaToken = null)
-{
-    if (await IsRateLimited(clientId))
-    {
-        return new ApplicationAuthResult { Message = "Please wait before generating another code.", Success = false };
-    }
-
-    var application = await _applicationRepository.GetApplicationByClientIdAsync(clientId);
-    if (application == null || !VerifyHashedSecret(clientSecret, application.ClientSecret))
-        return new ApplicationAuthResult { Message = "Invalid client credentials.", Success = false };
-
-    var configLock = await _applicationRepository.GetConfigurationLockAsync(clientId);
-    await _applicationRepository.SaveChangesAsync();
-
-    if (configLock.CaptchaNeeded)
-    {
-        if (string.IsNullOrEmpty(userCaptchaToken))
-            return new ApplicationAuthResult { Message = _checkBox.GenerateCaptchaToken(), Success = false };
-
-        if (!_checkBox.ValidateCaptchaToken(userCaptchaToken))
-            return new ApplicationAuthResult { Message = "Invalid Captcha", Success = false };
-    }
-
-    await _redis.StringSetAsync($"rate_limit:{clientId}", DateTime.UtcNow.ToString(), TimeSpan.FromSeconds(30));
-
-    string authCode = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
-    string encryptedAuthCode = EncryptAuthCode(authCode);
-    _authCodes.TryAdd(authCode, clientId);
-
-    await _redis.StringSetAsync($"auth_code:{encryptedAuthCode}", clientId, TimeSpan.FromMinutes(10));
-
-    return new ApplicationAuthResult
-    {
-        Success = true,
-        AuthorizationCode = authCode,
-        ApplicationDetails = new ApplicationDetails
+        public async Task<AuthResult> LoginAsync(string username, string password, string clientId, string clientSecret, string referrer)
         {
-            Id = application.Id,
-            Title = application.Title,
-            Description = application.Description,
-            ClientId = application.ClientId
+            var application = await _applicationRepository.GetApplicationByClientIdAsync(clientId);
+            if (application == null || !VerifyHashedSecret(clientSecret, application.ClientSecret))
+            {
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "Invalid client credentials",
+                    TwoFactorRequired = false
+                };
+            }
+
+            if (string.IsNullOrEmpty(application.RedirectUrls) || 
+                !application.RedirectUrls.Split(';').Contains(referrer))
+            {
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "Unauthorized referrer",
+                    TwoFactorRequired = false
+                };
+            }
+
+            var user = await _userRepo.GetByUsernameAsync(username);
+            if (user == null)
+            {
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "Invalid username or password",
+                    TwoFactorRequired = false
+                };
+            }
+
+            if (user.LoginAttempt >= 5)
+            {
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "Too many failed attempts. Account locked.",
+                    TwoFactorRequired = false
+                };
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(password, user.UserProperty.Password))
+            {
+                user.IncrementLoginAttempt();
+                await _userRepo.SaveChangesAsync(); 
+
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "Invalid username or password",
+                    TwoFactorRequired = false
+                };
+            }
+
+            // if (user.TwoFactorEnabled)
+            // {
+            //     if (string.IsNullOrWhiteSpace(authenticationCode) || !_authCodes.ContainsKey(authenticationCode))
+            //     {
+            //         return new AuthResult
+            //         {
+            //             Success = false,
+            //             Message = "Invalid authentication code",
+            //             TwoFactorRequired = true
+            //         };
+            //     }
+
+            //     _authCodes.TryRemove(authenticationCode, out _);
+            // }
+
+            user.ResetLoginAttempt();
+
+            var logPol = await _userRepo.GetLoginPoliciesByUserID(user.Id.ToString());
+            if (logPol != null && user.LoginAttempt > 5)
+            {
+                logPol.SetLockType(Domain.Enums.LockTypes.TemporaryLock);
+                await _userRepo.SaveChangesAsync();
+
+                throw new AuthenticationException("Account is temporarily locked due to too many failed attempts.");
+            }
+
+            var accessToken = _tokenService.GenerateAccessToken(user.Id);
+            var refreshToken = _tokenService.GenerateRefreshToken();
+
+            await _userRepo.SaveChangesAsync();
+            await _userPropertyRepo.SaveChangesAsync();
+
+            await SaveOauthTokenAsync(user.Id.ToString(), username, accessToken, refreshToken, tokenType: 1);
+
+            return new AuthResult
+            {
+                Success = true,
+                Token = accessToken,
+                TwoFactorRequired = false
+            };
         }
-    };
-}
 
-public class ApplicationAuthResult
-{
-    public bool Success { get; set; }
-    public string? AuthorizationCode { get; set; }
-    public string? Message { get; set; }
-    public ApplicationDetails? ApplicationDetails { get; set; }
-}
-
-public class ApplicationDetails
-{
-    public long Id { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string ClientId { get; set; }
-}
-
+        private static bool VerifyHashedSecret(string inputSecret, string storedHash)
+        {
+            return BCrypt.Net.BCrypt.Verify(inputSecret, storedHash);
+        }
+    
 
 
         private async Task<bool> IsRateLimited(string clientId)
@@ -143,10 +187,7 @@ public class ApplicationDetails
             }
         }
 
-        private static bool VerifyHashedSecret(string inputSecret, string storedHash)
-        {
-            return HashSecret(inputSecret) == storedHash;
-        }
+
 
 private static string HashSecret(string secret)
 {
@@ -183,85 +224,6 @@ private static string HashSecret(string secret)
 
 
 
-
-public async Task<AuthResult> LoginAsync(string username, string password, string authenticationCode)
-{
-    var user = await _userRepo.GetByUsernameAsync(username);
-    if (user == null)
-    {
-        return new AuthResult
-        {
-            Success = false,
-            Message = "Invalid username or password",
-            TwoFactorRequired = false
-        };
-    }
-
-    if (user.LoginAttempt >= 5)
-    {
-        return new AuthResult
-        {
-            Success = false,
-            Message = "Too many failed attempts. Account locked.",
-            TwoFactorRequired = false
-        };
-    }
-
-    if (!BCrypt.Net.BCrypt.Verify(password, user.UserProperty.Password))
-    {
-        user.IncrementLoginAttempt();
-        await _userRepo.SaveChangesAsync(); 
-
-        return new AuthResult
-        {
-            Success = false,
-            Message = "Invalid username or password",
-            TwoFactorRequired = false
-        };
-    }
-
-    if (user.TwoFactorEnabled)
-    {
-        if (string.IsNullOrWhiteSpace(authenticationCode) || !_authCodes.ContainsKey(authenticationCode))
-        {
-            return new AuthResult
-            {
-                Success = false,
-                Message = "Invalid authentication code",
-                TwoFactorRequired = true
-            };
-        }
-
-        _authCodes.TryRemove(authenticationCode, out _);
-    }
-
-    user.ResetLoginAttempt();
-
-    var logPol = await _userRepo.GetLoginPoliciesByUserID(user.Id.ToString());
-    if (logPol != null && user.LoginAttempt > 5)
-    {
-        logPol.SetLockType(Domain.Enums.LockTypes.TemporaryLock);
-        await _userRepo.SaveChangesAsync();
-
-        throw new AuthenticationException("Account is temporarily locked due to too many failed attempts.");
-    }
-
-    var accessToken = _tokenService.GenerateAccessToken(user.Id);
-    var refreshToken = _tokenService.GenerateRefreshToken();
-
-    await _userRepo.SaveChangesAsync();
-    await _userPropertyRepo.SaveChangesAsync();
-
-    await SaveOauthTokenAsync(user.Id.ToString(), username, accessToken, refreshToken, tokenType: 1);
-
-    return new AuthResult
-    {
-        Success = true,
-        Token = accessToken,
-        TwoFactorRequired = false 
-    };
-    
-}
 public async Task<string> SendOtpAsync(string phoneNumber)
 {
     try
@@ -484,161 +446,6 @@ public class UserDetails
 }
     
 
-    using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Security.Authentication;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using BCrypt.Net;
-using Application;
-using Authentication.Domain.Entities;
-using Authentication.Domain.Repositories;
-using Domain.Repositories;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using StackExchange.Redis;
 
-namespace Authentication.Application
-{
-    public class OAuthService
-    {
-        private readonly IApplicationRepository _applicationRepository;
-        private readonly IUserPropertyRepository _userPropertyRepo;
-        private readonly IUserRepository _userRepo;
-        private readonly OtpService _otpService;
-        private readonly CheckboxCaptchaService _checkBox;
-        private readonly TokenService _tokenService;
-        private readonly PuzzleCaptchaService _puzzleService;
-        private readonly IOAuthTokenRepository _OauthRepo;
-        private readonly IDatabase _redis;
-        private static readonly ConcurrentDictionary<string, string> _authCodes = new();
 
-        public OAuthService(
-            IOAuthTokenRepository oauthRepo,
-            PuzzleCaptchaService puzzleCaptchaService,
-            IUserPropertyRepository userPropertyRepository,
-            TokenService tokenService,
-            CheckboxCaptchaService checkboxCaptchaService,
-            OtpService otpService,
-            IConnectionMultiplexer redis,
-            IApplicationRepository applicationRepository,
-            IUserRepository userRepository)
-        {
-            _OauthRepo = oauthRepo;
-            _puzzleService = puzzleCaptchaService;
-            _userPropertyRepo = userPropertyRepository;
-            _tokenService = tokenService;
-            _checkBox = checkboxCaptchaService;
-            _applicationRepository = applicationRepository;
-            _userRepo = userRepository;
-            _otpService = otpService;
-            _redis = redis.GetDatabase();
-        }
 
-        public async Task<AuthResult> LoginAsync(string username, string password, string authenticationCode, string clientId, string clientSecret, string referrer)
-        {
-            var application = await _applicationRepository.GetApplicationByClientIdAsync(clientId);
-            if (application == null || !VerifyHashedSecret(clientSecret, application.ClientSecret))
-            {
-                return new AuthResult
-                {
-                    Success = false,
-                    Message = "Invalid client credentials",
-                    TwoFactorRequired = false
-                };
-            }
-
-            if (string.IsNullOrEmpty(application.RedirectUrls) || 
-                !application.RedirectUrls.Split(';').Contains(referrer))
-            {
-                return new AuthResult
-                {
-                    Success = false,
-                    Message = "Unauthorized referrer",
-                    TwoFactorRequired = false
-                };
-            }
-
-            var user = await _userRepo.GetByUsernameAsync(username);
-            if (user == null)
-            {
-                return new AuthResult
-                {
-                    Success = false,
-                    Message = "Invalid username or password",
-                    TwoFactorRequired = false
-                };
-            }
-
-            if (user.LoginAttempt >= 5)
-            {
-                return new AuthResult
-                {
-                    Success = false,
-                    Message = "Too many failed attempts. Account locked.",
-                    TwoFactorRequired = false
-                };
-            }
-
-            if (!BCrypt.Net.BCrypt.Verify(password, user.UserProperty.Password))
-            {
-                user.IncrementLoginAttempt();
-                await _userRepo.SaveChangesAsync(); 
-
-                return new AuthResult
-                {
-                    Success = false,
-                    Message = "Invalid username or password",
-                    TwoFactorRequired = false
-                };
-            }
-
-            if (user.TwoFactorEnabled)
-            {
-                if (string.IsNullOrWhiteSpace(authenticationCode) || !_authCodes.ContainsKey(authenticationCode))
-                {
-                    return new AuthResult
-                    {
-                        Success = false,
-                        Message = "Invalid authentication code",
-                        TwoFactorRequired = true
-                    };
-                }
-
-                _authCodes.TryRemove(authenticationCode, out _);
-            }
-
-            user.ResetLoginAttempt();
-
-            var logPol = await _userRepo.GetLoginPoliciesByUserID(user.Id.ToString());
-            if (logPol != null && user.LoginAttempt > 5)
-            {
-                logPol.SetLockType(Domain.Enums.LockTypes.TemporaryLock);
-                await _userRepo.SaveChangesAsync();
-
-                throw new AuthenticationException("Account is temporarily locked due to too many failed attempts.");
-            }
-
-            var accessToken = _tokenService.GenerateAccessToken(user.Id);
-            var refreshToken = _tokenService.GenerateRefreshToken();
-
-            await _userRepo.SaveChangesAsync();
-            await _userPropertyRepo.SaveChangesAsync();
-
-            await SaveOauthTokenAsync(user.Id.ToString(), username, accessToken, refreshToken, tokenType: 1);
-
-            return new AuthResult
-            {
-                Success = true,
-                Token = accessToken,
-                TwoFactorRequired = false
-            };
-        }
-
-        private static bool VerifyHashedSecret(string inputSecret, string storedHash)
-        {
-            return BCrypt.Net.BCrypt.Verify(inputSecret, storedHash);
-        }
-    }
-}

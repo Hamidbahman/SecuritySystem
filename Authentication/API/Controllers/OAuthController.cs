@@ -18,41 +18,40 @@ namespace Authentication.Application
             _authService = authService;
             _logger = logger;
         }
-
-        [HttpPost("generate-auth-code")]
-        public async Task<IActionResult> GenerateAuthCode([FromBody] AuthCodeRequest request)
+        [HttpPost("token")]
+        public async Task<IActionResult> GenerateToken([FromBody] TokenRequestModel model)
         {
-            var result = await _authService.GenerateAuthorizationCodeAsync(request.ClientId, request.ClientSecret, request.UserCaptchaToken);
+            var clientId = Request.Headers["Client-Id"].ToString();
+            var clientSecret = Request.Headers["Client-Secret"].ToString();
+            var referrer = Request.Headers["Referer"].ToString(); // Extract referrer
 
-            if (result == null || !result.Success)
-                return Unauthorized(new { Message = result?.Message ?? "Invalid client credentials or rate-limited. Try again later." });
-
-            return Ok(new
+            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
             {
-                AuthorizationCode = result.AuthorizationCode,
-                Application = result.ApplicationDetails
-            });
-        }
+                return BadRequest(new { error = "Client credentials are required." });
+            }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
-        {
-            var result = await _authService.LoginAsync(request.Username, request.Password, request.AuthenticationCode);
+            var authResult = await _authService.LoginAsync(model.Username, model.Password, clientId, clientSecret, referrer);
 
-            if (!result.Success)
+            if (!authResult.Success)
             {
-                if (result.TwoFactorRequired)
-                    return Unauthorized(new { Message = "OTP required." });
-
-                return Unauthorized(new { Message = result.Message });
+                return Unauthorized(new { error = authResult.Message });
             }
 
             return Ok(new
             {
-                Token = result.Token,
-                User = result.User,
+                access_token = authResult.Token,
+                two_factor_required = authResult.TwoFactorRequired
             });
         }
+
+
+
+
+
+
+
+
+
 
         [HttpPost("send-otp")]
         public async Task<IActionResult> SendOtp([FromBody] SendOtpRequest request)
@@ -116,73 +115,30 @@ namespace Authentication.Application
         public string? UserCaptchaToken { get; set; }
     }
 
+
+    public class TokenRequestModel
+    {
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
+
     public class LoginRequest
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string AuthenticationCode { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 
     public class OtpRequest
     {
-        public string OtpCode { get; set; }
+        public string OtpCode { get; set; } = string.Empty;
     }
 
     public class SendOtpRequest
     {
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 }
 
 
 
 
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace Authentication.API.Controllers
-{
-    [ApiController]
-    [Route("api/oauth")]
-    public class OAuthController : ControllerBase
-    {
-        private readonly OAuthService _authService;
-
-        public OAuthController(OAuthService authService)
-        {
-            _authService = authService;
-        }
-
-        [HttpPost("token")]
-        public async Task<IActionResult> GenerateToken([FromBody] TokenRequestModel model)
-        {
-            var clientId = Request.Headers["Client-Id"].ToString();
-            var clientSecret = Request.Headers["Client-Secret"].ToString();
-
-            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(clientSecret))
-            {
-                return BadRequest(new { error = "Client credentials are required." });
-            }
-
-            var authResult = await _authService.LoginAsync(model.Username, model.Password, model.AuthenticationCode, clientId, clientSecret);
-
-            if (!authResult.Success)
-            {
-                return Unauthorized(new { error = authResult.Message });
-            }
-
-            return Ok(new
-            {
-                access_token = authResult.Token,
-                two_factor_required = authResult.TwoFactorRequired
-            });
-        }
-    }
-
-    public class TokenRequestModel
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string AuthenticationCode { get; set; } // Optional for 2FA
-    }
-}

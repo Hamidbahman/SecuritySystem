@@ -9,12 +9,12 @@
       "API/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "2.3.0",
           "Microsoft.AspNetCore.OpenApi": "9.0.2",
           "Swashbuckle.AspNetCore.Swagger": "7.2.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "7.2.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "7.2.0",
-          "infrastructure": "1.0.0"
+          "Swashbuckle.AspNetCore.SwaggerUI": "7.2.0"
         },
         "runtime": {
           "API.dll": {}
@@ -1585,6 +1585,7 @@
       "Application/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "Infrastructure": "1.0.0",
           "KavenegarDotNetCore": "1.0.7",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "9.0.2",
           "Microsoft.AspNetCore.Http": "2.3.0",
@@ -1593,8 +1594,7 @@
           "Microsoft.Extensions.Configuration": "9.0.2",
           "SkiaSharp": "3.116.1",
           "StackExchange.Redis": "2.8.31",
-          "System.ServiceModel.Http": "8.1.1",
-          "infrastructure": "1.0.0"
+          "System.ServiceModel.Http": "8.1.1"
         },
         "runtime": {
           "Application.dll": {
@@ -1616,7 +1616,7 @@
           }
         }
       },
-      "infrastructure/1.0.0": {
+      "Infrastructure/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
@@ -1625,7 +1625,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
         },
         "runtime": {
-          "infrastructure.dll": {
+          "Infrastructure.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -2720,7 +2720,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "infrastructure/1.0.0": {
+    "Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

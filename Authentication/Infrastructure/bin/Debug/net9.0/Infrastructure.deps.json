@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v9.0": {
-      "infrastructure/1.0.0": {
+      "Infrastructure/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
@@ -15,7 +15,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "9.0.2"
         },
         "runtime": {
-          "infrastructure.dll": {}
+          "Infrastructure.dll": {}
         }
       },
       "Azure.Core/1.38.0": {
@@ -1012,7 +1012,7 @@
     }
   },
   "libraries": {
-    "infrastructure/1.0.0": {
+    "Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

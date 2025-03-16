@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dr\\25\\securitySystem\\authorization\\api\\api.csproj": {}
+    "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\api\\api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dr\\25\\securitySystem\\authorization\\api\\api.csproj": {
+    "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\api\\api.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\api\\obj\\",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\api\\api.csproj",
+        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,18 +26,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\application.csproj": {
-                "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\application.csproj"
+              "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\application.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\application.csproj"
               },
-              "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj"
+              "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj"
               }
             }
           }
@@ -102,17 +105,21 @@
         }
       }
     },
-    "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\application.csproj": {
+    "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\application.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\application.csproj",
         "projectName": "application",
-        "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\application.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\application\\obj\\",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\application.csproj",
+        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -120,15 +127,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj"
+              "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj"
               }
             }
           }
@@ -168,17 +174,21 @@
         }
       }
     },
-    "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\domain.csproj": {
+    "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\domain.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\domain.csproj",
         "projectName": "domain",
-        "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\domain.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\obj\\",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\domain.csproj",
+        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -186,7 +196,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -230,17 +239,21 @@
         }
       }
     },
-    "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
+    "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj",
         "projectName": "infrastructure",
-        "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Dr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\infrastructure.csproj",
+        "packagesPath": "C:\\Users\\hamid.RYMOND\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hamid.RYMOND\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -248,15 +261,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\domain.csproj": {
-                "projectPath": "C:\\Users\\Dr\\25\\securitySystem\\authorization\\domain\\domain.csproj"
+              "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\domain.csproj": {
+                "projectPath": "C:\\Users\\hamid.RYMOND\\26\\securitySystem\\authorization\\domain\\domain.csproj"
               }
             }
           }
